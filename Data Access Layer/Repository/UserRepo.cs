@@ -1,6 +1,12 @@
-﻿namespace Data_Access_Layer.Repository;
+﻿using Data_Access_Layer.Interfaces;
+using Data_Access_Layer.Models;
 
-public class UserRepo
+namespace Data_Access_Layer.Repository;
+
+internal class UserRepo : IUserRepo
 {
-    
+    public async Task<int> LoginAsync(User user)
+    {
+        throw new NotImplementedException();
+    }
 }
