@@ -36,13 +36,13 @@ internal class JWT_Helper
     }
 
     // can be used to validate X-Access-Token
-    public bool ValidateToken(string token)
+    public bool ValidateToken(string? token)
     {
         if (string.IsNullOrEmpty(token))
         {
             return false;
         }
-        var mySecret = Encoding.UTF8.GetBytes(_configuration["SecretKey"]);
+        var mySecret = Encoding.UTF8.GetBytes(_configuration["SecretKey"]!);
         var mySecurityKey = new SymmetricSecurityKey(mySecret);
         var tokenHandler = new JwtSecurityTokenHandler();
         try
@@ -52,8 +52,8 @@ internal class JWT_Helper
                 ValidateIssuerSigningKey = true,
                 ValidateIssuer = true,
                 ValidateAudience = true,
-                ValidIssuer = _configuration["Issuer"].ToString(),
-                ValidAudience = _configuration["Audience"].ToString(),
+                ValidIssuer = _configuration["Issuer"]!.ToString(),
+                ValidAudience = _configuration["Audience"]!.ToString(),
                 IssuerSigningKey = mySecurityKey,
             }, out SecurityToken validatedToken);
             var temp = (JwtSecurityToken)validatedToken;
