@@ -28,21 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.email_label = new System.Windows.Forms.Label();
+            this.userName_label = new System.Windows.Forms.Label();
             this.masterPassword_label = new System.Windows.Forms.Label();
-            this.emailTextBox = new System.Windows.Forms.TextBox();
+            this.usernameTextBox = new System.Windows.Forms.TextBox();
             this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // email_label
+            // userName_label
             // 
-            this.email_label.AutoSize = true;
-            this.email_label.Location = new System.Drawing.Point(425, 153);
-            this.email_label.Name = "email_label";
-            this.email_label.Size = new System.Drawing.Size(46, 20);
-            this.email_label.TabIndex = 0;
-            this.email_label.Text = "Email";
+            this.userName_label.AutoSize = true;
+            this.userName_label.Location = new System.Drawing.Point(415, 153);
+            this.userName_label.Name = "userName_label";
+            this.userName_label.Size = new System.Drawing.Size(75, 20);
+            this.userName_label.TabIndex = 0;
+            this.userName_label.Text = "Username";
             // 
             // masterPassword_label
             // 
@@ -53,13 +53,13 @@
             this.masterPassword_label.TabIndex = 1;
             this.masterPassword_label.Text = "Master Password";
             // 
-            // emailTextBox
+            // usernameTextBox
             // 
-            this.emailTextBox.Location = new System.Drawing.Point(365, 176);
-            this.emailTextBox.Name = "emailTextBox";
-            this.emailTextBox.Size = new System.Drawing.Size(167, 27);
-            this.emailTextBox.TabIndex = 2;
-            this.emailTextBox.TextChanged += new System.EventHandler(this.EmailText_Changed);
+            this.usernameTextBox.Location = new System.Drawing.Point(365, 176);
+            this.usernameTextBox.Name = "usernameTextBox";
+            this.usernameTextBox.Size = new System.Drawing.Size(167, 27);
+            this.usernameTextBox.TabIndex = 2;
+            this.usernameTextBox.TextChanged += new System.EventHandler(this.UsernameText_Changed);
             // 
             // passwordTextBox
             // 
@@ -71,7 +71,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(405, 287);
+            this.button1.Location = new System.Drawing.Point(405, 285);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(94, 29);
             this.button1.TabIndex = 4;
@@ -85,9 +85,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.button1);
             this.Controls.Add(this.passwordTextBox);
-            this.Controls.Add(this.emailTextBox);
+            this.Controls.Add(this.usernameTextBox);
             this.Controls.Add(this.masterPassword_label);
-            this.Controls.Add(this.email_label);
+            this.Controls.Add(this.userName_label);
             this.Name = "LogInPage";
             this.Size = new System.Drawing.Size(889, 610);
             this.Load += new System.EventHandler(this.LogInPage_Load);
@@ -98,9 +98,9 @@
 
         #endregion
 
-        private Label email_label;
+        private Label userName_label;
         private Label masterPassword_label;
-        private TextBox emailTextBox;
+        private TextBox usernameTextBox;
         private TextBox passwordTextBox;
         private Button button1;
     }

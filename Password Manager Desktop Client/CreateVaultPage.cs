@@ -7,14 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Web_Client;
 
-namespace Password_Manager_Desktop_Client
+namespace Password_Manager_Desktop_Client;
+
+public partial class CreateVaultPage : UserControl
 {
-    public partial class CreateVaultPage : UserControl
+    private IWebClient _client;
+    public CreateVaultPage(IWebClient client)
     {
-        public CreateVaultPage()
-        {
-            InitializeComponent();
-        }
+        _client = client;
+        InitializeComponent();
     }
 }
