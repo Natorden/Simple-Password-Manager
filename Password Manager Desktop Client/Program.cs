@@ -1,3 +1,8 @@
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Configuration;
+using Web_Client;
+
 namespace Password_Manager_Desktop_Client;
 
 internal static class Program
@@ -8,9 +13,24 @@ internal static class Program
     [STAThread]
     static void Main()
     {
-        // To customize application configuration such as set high DPI settings or default font,
-        // see https://aka.ms/applicationconfiguration.
-        ApplicationConfiguration.Initialize();
-        Application.Run(new Form1());
+        Application.SetHighDpiMode(HighDpiMode.SystemAware);
+        Application.EnableVisualStyles();
+        Application.SetCompatibleTextRenderingDefault(false);
+
+        var services = new ServiceCollection();
+        ConfigureServices(services);
+
+        using ServiceProvider serviceProvider = services.BuildServiceProvider();
+        var desktopClientForm = serviceProvider.GetRequiredService<Form1>();
+        Application.Run(desktopClientForm);
+        // ApplicationConfiguration.Initialize();
+        // Application.Run(new Form1());
+    }
+
+    private static void ConfigureServices(ServiceCollection services)
+    {
+        string webApiUri = ConfigurationManager.ConnectionStrings["webApiUri"].ConnectionString;
+        services.AddSingleton((desktopApiClient) => WebClientFactory.GetWebClient<IWebClient>(webApiUri));
+        services.AddScoped<Form1>();
     }
 }
