@@ -22,25 +22,15 @@ internal class PasswordVaultRepo : IPasswordVaultRepo
         using var connection = new SqlConnection(_connectionString);
         
         DynamicParameters parameters = new DynamicParameters();   
-        parameters.Add("UserGuID", ownerGuid); 
-        
-        var vaults = await connection.QueryAsync<PasswordVault, IEnumerable<HashedCredentials>, PasswordVault>(
-            "GET_VAULT",
-            (vault, credentials) =>
-            {
-                if (vault.EncryptedVault == null)
-                    vault.EncryptedVault = new List<HashedCredentials>();
+        parameters.Add("UserGuID", ownerGuid);
 
-                _ = vault.EncryptedVault.Concat(credentials);
-                return vault;
-            },
-            new { ownerGuid },
-            splitOn: "Sitename" // Specify the column to split the results on
-            , commandType: CommandType.StoredProcedure);
-        
-        // var hashedCreds = await connection.QuerySingleOrDefaultAsync<IEnumerable<HashedCredentials>>("GET_VAULT", parameters, commandType: CommandType.StoredProcedure);
+        var vault = new PasswordVault
+        {
+            OwnerGuid = ownerGuid,
+            EncryptedVault = await connection.QuerySingleOrDefaultAsync<IEnumerable<HashedCredentials>>("GET_VAULT", parameters, commandType: CommandType.StoredProcedure)
+        };
 
-        return vaults.Distinct().FirstOrDefault();
+        return vault;
     }
 
     public async Task<bool> UpdateAsync(Guid ownerGuid, PasswordVault vault)
