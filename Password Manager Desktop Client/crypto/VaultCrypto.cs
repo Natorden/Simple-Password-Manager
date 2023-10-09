@@ -11,7 +11,7 @@ internal class VaultCrypto : IVaultCrypto
     private PasswordVaultDto _decryptedVault;
     private VaultKeyGenerator _vaultKeyGenerator;
 
-    public PasswordVaultDto EncryptVault(PasswordVaultDto vault)
+    public PasswordVaultDto EncryptVault(PasswordVaultDto vault, string username, string password)
     {
         throw new NotImplementedException();
     }

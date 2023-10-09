@@ -9,6 +9,6 @@ namespace Password_Manager_Desktop_Client.crypto
 {
     public interface IVaultCrypto
     {
-        public PasswordVaultDto EncryptVault(PasswordVaultDto vault);
+        public PasswordVaultDto EncryptVault(PasswordVaultDto vault, string username, string password);
     }
 }
