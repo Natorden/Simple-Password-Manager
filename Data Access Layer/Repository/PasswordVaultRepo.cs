@@ -45,6 +45,28 @@ internal class PasswordVaultRepo : IPasswordVaultRepo
 
     public async Task<bool> UpdateAsync(Guid ownerGuid, PasswordVault vault)
     {
-        throw new NotImplementedException();
+        using var connection = new SqlConnection(_connectionString);
+
+        if (vault.EncryptedVault == null)
+            return false;
+        
+        try{
+            foreach(var credential in vault.EncryptedVault) 
+            {
+                DynamicParameters parameters = new DynamicParameters(); 
+                parameters.Add("Guid", vault.OwnerGuid);
+                parameters.Add("Sitename", credential.Sitename);
+                parameters.Add("Username", credential.Username);  
+                parameters.Add("Password", credential.Password); 
+                
+                await connection.QueryAsync("CREATE_VAULT", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+        catch
+        {
+            return false;
+        }
+
+        return true;
     }
 }
