@@ -79,7 +79,6 @@ public partial class Form1 : Form
         }
     }
     private void OnForm_Resize(object sender, EventArgs e) => AdjustForm();
-    private void DesktopClientForm_Load(object sender, EventArgs e) => OnLoad();
     private void btnExit_Click(object sender, EventArgs e) => Exit();
     private void btnMaximise_Click(object sender, EventArgs e) => Maximise();
     private void btnMinimise_Click(object sender, EventArgs e) => Minimise();
@@ -188,5 +187,5 @@ public partial class Form1 : Form
             return cp;
         }
     }
-
+    #endregion
 }

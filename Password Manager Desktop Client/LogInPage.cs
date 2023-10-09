@@ -45,7 +45,7 @@ public partial class LogInPage : UserControl
         else
         {
             //Load vault page
-            CreateVaultPage createVaultPage = new CreateVaultPage(_client, userId.Value);
+            CreateVaultPage createVaultPage = new CreateVaultPage(_client, userId.Value, _username, _password);
             createVaultPage.Dock = DockStyle.Fill;
         }
 
