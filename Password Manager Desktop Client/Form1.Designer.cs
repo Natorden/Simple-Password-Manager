@@ -28,79 +28,31 @@ partial class Form1
     /// </summary>
     private void InitializeComponent()
     {
-            this.logInBtn = new System.Windows.Forms.Button();
-            this.emailInput = new System.Windows.Forms.TextBox();
-            this.passwordInput = new System.Windows.Forms.TextBox();
-            this.EmailLabel = new System.Windows.Forms.Label();
-            this.PasswordLabel = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
-            // logInBtn
+            // panel1
             // 
-            this.logInBtn.Location = new System.Drawing.Point(370, 383);
-            this.logInBtn.Name = "logInBtn";
-            this.logInBtn.Size = new System.Drawing.Size(75, 23);
-            this.logInBtn.TabIndex = 0;
-            this.logInBtn.Text = "Log In";
-            this.logInBtn.UseVisualStyleBackColor = true;
-            this.logInBtn.Click += new System.EventHandler(this.logInBtn_Click);
-            // 
-            // emailInput
-            // 
-            this.emailInput.Location = new System.Drawing.Point(336, 153);
-            this.emailInput.Name = "emailInput";
-            this.emailInput.Size = new System.Drawing.Size(149, 23);
-            this.emailInput.TabIndex = 1;
-            this.emailInput.TextChanged += new System.EventHandler(this.emailInput_Changed);
-            // 
-            // passwordInput
-            // 
-            this.passwordInput.Location = new System.Drawing.Point(336, 217);
-            this.passwordInput.Name = "passwordInput";
-            this.passwordInput.Size = new System.Drawing.Size(149, 23);
-            this.passwordInput.TabIndex = 2;
-            this.passwordInput.TextChanged += new System.EventHandler(this.passwordInput_Changed);
-            // 
-            // EmailLabel
-            // 
-            this.EmailLabel.AutoSize = true;
-            this.EmailLabel.Location = new System.Drawing.Point(389, 135);
-            this.EmailLabel.Name = "EmailLabel";
-            this.EmailLabel.Size = new System.Drawing.Size(36, 15);
-            this.EmailLabel.TabIndex = 3;
-            this.EmailLabel.Text = "Email";
-            // 
-            // PasswordLabel
-            // 
-            this.PasswordLabel.AutoSize = true;
-            this.PasswordLabel.Location = new System.Drawing.Point(379, 199);
-            this.PasswordLabel.Name = "PasswordLabel";
-            this.PasswordLabel.Size = new System.Drawing.Size(57, 15);
-            this.PasswordLabel.TabIndex = 4;
-            this.PasswordLabel.Text = "Password";
+            this.panel1.Location = new System.Drawing.Point(81, 88);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(741, 417);
+            this.panel1.TabIndex = 0;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.PasswordLabel);
-            this.Controls.Add(this.EmailLabel);
-            this.Controls.Add(this.passwordInput);
-            this.Controls.Add(this.emailInput);
-            this.Controls.Add(this.logInBtn);
+            this.ClientSize = new System.Drawing.Size(914, 608);
+            this.Controls.Add(this.panel1);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
     }
 
     #endregion
 
-    private Button logInBtn;
-    private TextBox emailInput;
-    private TextBox passwordInput;
-    private Label EmailLabel;
-    private Label PasswordLabel;
+    private Panel panel1;
 }
