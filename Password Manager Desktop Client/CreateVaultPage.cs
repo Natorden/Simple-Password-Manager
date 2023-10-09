@@ -7,12 +7,16 @@ public partial class CreateVaultPage : UserControl
 {
     private IWebClient _client;
     private Guid _userId;
+    private string _username;
+    private string _password;
     private PasswordVaultDto _decriptedVault;
 
-    public CreateVaultPage(IWebClient client, Guid userId)
+    public CreateVaultPage(IWebClient client, Guid userId, string username, string password)
     {
         _client = client;
         _userId = userId;
+        _username = username;
+        _password = password;
         InitializeComponent();
     }
 
