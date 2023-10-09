@@ -296,7 +296,7 @@
       <option name="presentableId" value="Default" />
       <updated>1696235164736</updated>
       <workItem from="1696235177425" duration="8590000" />
-      <workItem from="1696839796464" duration="13692000" />
+      <workItem from="1696839796464" duration="14245000" />
     </task>
     <servers />
   </component>
@@ -321,32 +321,6 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Data Access Layer/Repository/PasswordVaultRepo.cs</url>
-          <line>24</line>
-          <properties documentPath="C:\University Work\C# Github Repository\Simple Password Manager\Data Access Layer\Repository\PasswordVaultRepo.cs" initialLine="24" containingFunctionPresentation="Method 'GetAsync'">
-            <startOffsets>
-              <option value="625" />
-            </startOffsets>
-            <endOffsets>
-              <option value="664" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Data Access Layer/Repository/PasswordVaultRepo.cs</url>
-          <line>39</line>
-          <properties documentPath="C:\University Work\C# Github Repository\Simple Password Manager\Data Access Layer\Repository\PasswordVaultRepo.cs" initialLine="49" containingFunctionPresentation="Method 'UpdateAsync'">
-            <startOffsets>
-              <option value="1094" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1127" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/WebAPI/Controllers/PasswordVaultController.cs</url>
