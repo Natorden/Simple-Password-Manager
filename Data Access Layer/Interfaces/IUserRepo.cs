@@ -3,5 +3,5 @@
 namespace Data_Access_Layer.Interfaces;
 public interface IUserRepo
 {
-    Task<int> LoginAsync(User user);
+    Task<Guid?> LoginAsync(User user);
 }
