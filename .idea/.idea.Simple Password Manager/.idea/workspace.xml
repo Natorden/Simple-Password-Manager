@@ -29,7 +29,9 @@
     <setting file="file://$PROJECT_DIR$/Web API/Program.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/81a3bcf4bb6aa5e62a9839f9cfeeba6126496f4fa07d1e57b27a5176e42525/ControllerBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/829d6ac6e62b9bee9ef8e79e827d87d0c31a7c2eefbc354135d9a8f2c4deb/Mapper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/83865083c64438e2857c5c6ac7dea854f59896b77dbf57ebbecff78fd56f61/DynamicParameters.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/85448f861b1cb95910693f28a5ce3363967c79953b460b176d97298ae5ed0/Nullable.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9a6b1457cbcf17db31a383ba49ef9bcc786cf3ef77146d997eee499b27a46d/Object.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
@@ -289,7 +291,7 @@
       <option name="presentableId" value="Default" />
       <updated>1696235164736</updated>
       <workItem from="1696235177425" duration="8590000" />
-      <workItem from="1696839796464" duration="10725000" />
+      <workItem from="1696839796464" duration="12052000" />
     </task>
     <servers />
   </component>
@@ -330,13 +332,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Data Access Layer/Repository/PasswordVaultRepo.cs</url>
-          <line>49</line>
+          <line>39</line>
           <properties documentPath="C:\University Work\C# Github Repository\Simple Password Manager\Data Access Layer\Repository\PasswordVaultRepo.cs" initialLine="49" containingFunctionPresentation="Method 'UpdateAsync'">
             <startOffsets>
-              <option value="1661" />
+              <option value="1094" />
             </startOffsets>
             <endOffsets>
-              <option value="1694" />
+              <option value="1127" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="7" />

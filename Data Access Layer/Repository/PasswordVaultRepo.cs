@@ -22,12 +22,12 @@ internal class PasswordVaultRepo : IPasswordVaultRepo
         using var connection = new SqlConnection(_connectionString);
         
         DynamicParameters parameters = new DynamicParameters();   
-        parameters.Add("UserGuID", ownerGuid);
+        parameters.Add("ownerGuid", ownerGuid);
 
         var vault = new PasswordVault
         {
             OwnerGuid = ownerGuid,
-            EncryptedVault = await connection.QuerySingleOrDefaultAsync<IEnumerable<HashedCredentials>>("GET_VAULT", parameters, commandType: CommandType.StoredProcedure)
+            EncryptedVault = await connection.QueryAsync<HashedCredentials>("GET_VAULT", parameters, commandType: CommandType.StoredProcedure)
         };
 
         return vault;
