@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using Password_Manager_Desktop_Client.crypto;
 using System;
 using System.Configuration;
 using Web_Client;
@@ -31,6 +32,7 @@ internal static class Program
     {
         string webApiUri = ConfigurationManager.ConnectionStrings["webApiUri"].ConnectionString;
         services.AddSingleton((desktopApiClient) => WebClientFactory.GetWebClient<IWebClient>(webApiUri));
+        services.AddSingleton<IVaultCrypto>();
         services.AddScoped<Form1>();
     }
 }
