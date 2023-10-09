@@ -23,6 +23,7 @@ public partial class Form1 : Form
         createShowPage.Dock = DockStyle.Fill;
         panel1.Controls.Add(createShowPage);
         Padding = new(_borderSize);
+        titleLbl.Text = this.Text;
         MaximizedBounds = Screen.FromHandle(Handle).WorkingArea;
     }
 
@@ -188,4 +189,19 @@ public partial class Form1 : Form
         }
     }
     #endregion
+
+    private void closeBtn_Click(object sender, EventArgs e)
+    {
+        Exit();
+    }
+
+    private void maximizeBtn_Click(object sender, EventArgs e)
+    {
+        Maximise();
+    }
+
+    private void minimizeBtn_Click(object sender, EventArgs e)
+    {
+        Minimise();
+    }
 }

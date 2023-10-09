@@ -7,7 +7,7 @@ public static class WebClientFactory
     {
         return typeof(T).Name switch
         {
-            "IWebApiClient" => (new WebClient(new RestClient(connectionstring)) as T)!,
+            "IWebClient" => (new WebClient(new RestClient(connectionstring)) as T)!,
             _ => throw new ArgumentException($"Unknown type {typeof(T).FullName}"),
         };
     }
