@@ -27,6 +27,9 @@
     <setting file="file://$PROJECT_DIR$/Password Manager App/Program.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Program.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Web API/Program.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/81a3bcf4bb6aa5e62a9839f9cfeeba6126496f4fa07d1e57b27a5176e42525/ControllerBase.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/829d6ac6e62b9bee9ef8e79e827d87d0c31a7c2eefbc354135d9a8f2c4deb/Mapper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/85448f861b1cb95910693f28a5ce3363967c79953b460b176d97298ae5ed0/Nullable.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
@@ -57,7 +60,7 @@
     ]
   }
 }</component>
-  <component name="RunManager" selected=".NET Launch Settings Profile.Simple Password Manager: http">
+  <component name="RunManager" selected=".NET Launch Settings Profile.WebAPI: http">
     <configuration name="Password Manager App" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -286,7 +289,7 @@
       <option name="presentableId" value="Default" />
       <updated>1696235164736</updated>
       <workItem from="1696235177425" duration="8590000" />
-      <workItem from="1696839796464" duration="7223000" />
+      <workItem from="1696839796464" duration="10725000" />
     </task>
     <servers />
   </component>
@@ -295,5 +298,89 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/WebAPI/Controllers/LoginController.cs</url>
+          <line>26</line>
+          <properties documentPath="C:\University Work\C# Github Repository\Simple Password Manager\WebAPI\Controllers\LoginController.cs" initialLine="26" containingFunctionPresentation="Method 'PostAsync'">
+            <startOffsets>
+              <option value="792" />
+            </startOffsets>
+            <endOffsets>
+              <option value="793" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Data Access Layer/Repository/PasswordVaultRepo.cs</url>
+          <line>24</line>
+          <properties documentPath="C:\University Work\C# Github Repository\Simple Password Manager\Data Access Layer\Repository\PasswordVaultRepo.cs" initialLine="24" containingFunctionPresentation="Method 'GetAsync'">
+            <startOffsets>
+              <option value="625" />
+            </startOffsets>
+            <endOffsets>
+              <option value="664" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Data Access Layer/Repository/PasswordVaultRepo.cs</url>
+          <line>49</line>
+          <properties documentPath="C:\University Work\C# Github Repository\Simple Password Manager\Data Access Layer\Repository\PasswordVaultRepo.cs" initialLine="49" containingFunctionPresentation="Method 'UpdateAsync'">
+            <startOffsets>
+              <option value="1661" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1694" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/WebAPI/Controllers/PasswordVaultController.cs</url>
+          <line>30</line>
+          <properties documentPath="C:\University Work\C# Github Repository\Simple Password Manager\WebAPI\Controllers\PasswordVaultController.cs" initialLine="30" containingFunctionPresentation="Method 'Get'">
+            <startOffsets>
+              <option value="1008" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1009" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/WebAPI/Controllers/PasswordVaultController.cs</url>
+          <line>45</line>
+          <properties documentPath="C:\University Work\C# Github Repository\Simple Password Manager\WebAPI\Controllers\PasswordVaultController.cs" initialLine="45" containingFunctionPresentation="Method 'Put'">
+            <startOffsets>
+              <option value="1523" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1524" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/WebAPI/Controllers/PasswordVaultController.cs</url>
+          <line>70</line>
+          <properties documentPath="C:\University Work\C# Github Repository\Simple Password Manager\WebAPI\Controllers\PasswordVaultController.cs" initialLine="70" containingFunctionPresentation="Method 'GetValidationErrors'">
+            <startOffsets>
+              <option value="2279" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2280" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
