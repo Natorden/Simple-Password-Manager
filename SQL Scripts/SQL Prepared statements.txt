@@ -1,0 +1,71 @@
+/****** Creates a prepared statement that logs in to the password manager and returns the user id which will be used later on ******/
+
+CREATE PROCEDURE USER_MASTER_LOGIN 
+	-- Add the parameters for the stored procedure here
+	@Username nvarchar(255)= null,
+	@Password nvarchar(255)= null
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+	
+    -- Insert statements for procedure here
+	SELECT Guid FROM [User] WHERE Username = @Username AND Password = @Password
+
+END
+GO
+
+
+
+/****** Creates a prepared statement that fetches passwords from the password manager ******/
+
+CREATE OR ALTER PROCEDURE GET_VAULT 
+	-- Add the parameters for the stored procedure here
+	@UserGuID uniqueidentifier = null
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	IF @UserGuID IS NOT NULL
+		SELECT E.Sitename, E.Username, E.Password AS UserVault 
+		FROM EncryptedVault E 
+			JOIN UserEncryptedVault UE ON UE.VaultSitename = E.Sitename
+			JOIN [User] U ON U.Guid = UE.UserGuid
+		WHERE UE.UserGuid = @UserGuID
+	ELSE 
+		THROW 50001, 'Error fetching vault',1
+END
+GO
+
+
+/****** Creates a prepared statement that adds news passwords to the password manager ******/
+
+CREATE PROCEDURE CREATE_VAULT 
+	-- Add the parameters for the stored procedure here
+	@UserGuID uniqueidentifier = null,
+	@Sitename nvarchar(255)= null,
+	@Username nvarchar(255)= null,
+	@Password nvarchar(255)= null
+
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	IF @UserGuID IS NOT NULL
+		BEGIN
+			INSERT INTO EncryptedVault (Sitename, Username, Password)
+				VALUES (@Sitename, @Username, @Password)
+			INSERT INTO UserEncryptedVault (UserGuid, VaultSitename)
+				VALUES (@UserGuID, @Sitename)
+		END
+	ELSE 
+		THROW 50001, 'Error creating vault',1
+END
+GO
