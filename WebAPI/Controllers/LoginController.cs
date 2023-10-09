@@ -31,8 +31,8 @@ public class LoginController : ControllerBase
         }
 
         var user = DtoConverter<UserDto, User>.From(userDto);
-        int? returnedId = await _userRepo.LoginAsync(user);
-        if (returnedId.HasValue && returnedId.Value != -1)
+        Guid? returnedId = await _userRepo.LoginAsync(user);
+        if ( returnedId.HasValue && returnedId.Value != Guid.Empty)
         {
             string jwtToken = _jwtHelper.GenerateToken(userDto);
             Response.Cookies.Append("X-Access-Token", jwtToken,
