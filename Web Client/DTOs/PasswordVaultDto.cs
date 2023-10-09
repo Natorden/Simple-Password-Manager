@@ -1,4 +1,4 @@
-﻿namespace WebAPI.DTOs;
+﻿namespace Web_Client.DTOs;
 
 public sealed record PasswordVaultDto
 {
