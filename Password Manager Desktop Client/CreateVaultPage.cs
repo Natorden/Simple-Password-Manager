@@ -19,4 +19,14 @@ public partial class CreateVaultPage : UserControl
         _client = client;
         InitializeComponent();
     }
+
+    private void CreateVaultPage_Load(object sender, EventArgs e)
+    {
+
+    }
+
+    private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
 }

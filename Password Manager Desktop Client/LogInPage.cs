@@ -7,12 +7,14 @@ namespace Password_Manager_Desktop_Client;
 public partial class LogInPage : UserControl
 {
     private IWebClient _client;
-    private static string _email;
-    private static string _password;
+    private string _username;
+    private string _password;
 
     public LogInPage(IWebClient client)
     {
         _client = client;
+        _username = "";
+        _password = "";
         InitializeComponent();
     }
 
@@ -23,7 +25,7 @@ public partial class LogInPage : UserControl
 
     private void UsernameText_Changed(object sender, EventArgs e)
     {
-        usernameTextBox.Text = _email;
+        usernameTextBox.Text = _username;
     }
 
     private void PasswordText_Changed(object sender, EventArgs e)
@@ -33,17 +35,17 @@ public partial class LogInPage : UserControl
 
     private async void LogInButton_Clicked(object sender, EventArgs e)
     {
-        var _userDTO = createUserDTO(_email, _password);
-        var authentificate = await _client.LoginAsync(_userDTO);
+        var _userDTO = createUserDTO(_username, _password);
+        var userId = await _client.LoginAsync(_userDTO);
 
-        if(authentificate == null)
+        if(userId.HasValue)
         {
             //TODO display wrong credentials error
         }
         else
         {
             //Load vault page
-            CreateVaultPage createVaultPage = new CreateVaultPage(_client);
+            CreateVaultPage createVaultPage = new CreateVaultPage(_client, userId.Value);
             createVaultPage.Dock = DockStyle.Fill;
         }
 
