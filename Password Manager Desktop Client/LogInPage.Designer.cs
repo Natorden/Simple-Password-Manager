@@ -38,7 +38,8 @@
             // userName_label
             // 
             this.userName_label.AutoSize = true;
-            this.userName_label.Location = new System.Drawing.Point(415, 153);
+            this.userName_label.Dock = System.Windows.Forms.DockStyle.Top;
+            this.userName_label.Location = new System.Drawing.Point(100, 100);
             this.userName_label.Name = "userName_label";
             this.userName_label.Size = new System.Drawing.Size(75, 20);
             this.userName_label.TabIndex = 0;
@@ -47,7 +48,8 @@
             // masterPassword_label
             // 
             this.masterPassword_label.AutoSize = true;
-            this.masterPassword_label.Location = new System.Drawing.Point(393, 219);
+            this.masterPassword_label.Dock = System.Windows.Forms.DockStyle.Top;
+            this.masterPassword_label.Location = new System.Drawing.Point(100, 147);
             this.masterPassword_label.Name = "masterPassword_label";
             this.masterPassword_label.Size = new System.Drawing.Size(119, 20);
             this.masterPassword_label.TabIndex = 1;
@@ -55,25 +57,30 @@
             // 
             // usernameTextBox
             // 
-            this.usernameTextBox.Location = new System.Drawing.Point(365, 176);
+            this.usernameTextBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.usernameTextBox.Location = new System.Drawing.Point(100, 120);
+            this.usernameTextBox.MaximumSize = new System.Drawing.Size(250, 0);
             this.usernameTextBox.Name = "usernameTextBox";
-            this.usernameTextBox.Size = new System.Drawing.Size(167, 27);
+            this.usernameTextBox.Size = new System.Drawing.Size(250, 27);
             this.usernameTextBox.TabIndex = 2;
             this.usernameTextBox.TextChanged += new System.EventHandler(this.UsernameText_Changed);
             // 
             // passwordTextBox
             // 
-            this.passwordTextBox.Location = new System.Drawing.Point(365, 242);
+            this.passwordTextBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.passwordTextBox.Location = new System.Drawing.Point(100, 167);
+            this.passwordTextBox.MaximumSize = new System.Drawing.Size(250, 0);
             this.passwordTextBox.Name = "passwordTextBox";
-            this.passwordTextBox.Size = new System.Drawing.Size(167, 27);
+            this.passwordTextBox.Size = new System.Drawing.Size(250, 27);
             this.passwordTextBox.TabIndex = 3;
             this.passwordTextBox.TextChanged += new System.EventHandler(this.PasswordText_Changed);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(405, 285);
+            this.button1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.button1.Location = new System.Drawing.Point(100, 194);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(94, 29);
+            this.button1.Size = new System.Drawing.Size(689, 29);
             this.button1.TabIndex = 4;
             this.button1.Text = "Log In";
             this.button1.UseVisualStyleBackColor = true;
@@ -85,12 +92,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.button1);
             this.Controls.Add(this.passwordTextBox);
-            this.Controls.Add(this.usernameTextBox);
             this.Controls.Add(this.masterPassword_label);
+            this.Controls.Add(this.usernameTextBox);
             this.Controls.Add(this.userName_label);
             this.Name = "LogInPage";
+            this.Padding = new System.Windows.Forms.Padding(100);
             this.Size = new System.Drawing.Size(889, 610);
-            this.Load += new System.EventHandler(this.LogInPage_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

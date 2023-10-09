@@ -21,11 +21,6 @@ public partial class LogInPage : UserControl
         InitializeComponent();
     }
 
-    private void LogInPage_Load(object sender, EventArgs e)
-    {
-        
-    }
-
     private void UsernameText_Changed(object sender, EventArgs e)
     {
         usernameTextBox.Text = _username;
