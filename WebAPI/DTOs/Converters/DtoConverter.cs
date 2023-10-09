@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Data_Access_Layer.Models;
 
 namespace WebAPI.DTOs.Converters;
 
@@ -7,6 +8,8 @@ public static class DtoConverter<FromType, ToType>
     private static readonly MapperConfiguration _config = new(cfg =>
     {
         cfg.CreateMap<FromType, ToType>();
+        cfg.CreateMap<PasswordVault, PasswordVaultDto>();
+        cfg.CreateMap<HashedCredentials, HashedCredentialsDto>();
     });
     private readonly static Mapper _mapper = new(_config);
 
