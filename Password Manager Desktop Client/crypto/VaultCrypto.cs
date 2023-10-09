@@ -28,7 +28,9 @@ public class VaultCrypto : IVaultCrypto
                     aes.Encrypt(nonce: usernameNonce, plaintext: usernameBytes, ciphertext: usernameCypher, tag: usernameTag);
 
                     credentials.Username = usernameNonce.Concat(usernameCypher).Concat(usernameTag).ToArray();
+                    //TODO finish for all of the properties
                 }
+                return vault;
             }
             else
             {
