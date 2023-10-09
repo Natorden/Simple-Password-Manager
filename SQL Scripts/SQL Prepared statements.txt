@@ -31,7 +31,7 @@ BEGIN
 
     -- Insert statements for procedure here
 	IF @UserGuID IS NOT NULL
-		SELECT U.Guid, E.Sitename, E.Username, E.Password 
+		SELECT E.Sitename, E.Username, E.Password AS UserVault 
 		FROM EncryptedVault E 
 			JOIN UserEncryptedVault UE ON UE.VaultSitename = E.Sitename
 			JOIN [User] U ON U.Guid = UE.UserGuid
@@ -58,21 +58,14 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-	IF @UserGuID IS NOT NULL
-		BEGIN
-		IF EXISTS (SELECT 1 FROM EncryptedVault WHERE Sitename = @Sitename)
-			BEGIN
-				UPDATE EncryptedVault SET Username = @Username, Password = @Password
-			END
+	IF @Userguid IS NOT NULL
+		IF EXISTS (SELECT 1 FROM EncryptedVault WHERE Userguid = @Userguid AND Sitename = @Sitename)
+			UPDATE EncryptedVault SET Sitename = @Sitename, Username = @Username, Password = @Password
 		ELSE 
-			BEGIN
-				INSERT INTO EncryptedVault (Sitename, Username, Password)
-					VALUES (@Sitename, @Username, @Password)
-				INSERT INTO UserEncryptedVault (UserGuid, VaultSitename)
-					VALUES (@UserGuID, @Sitename)
-			END
-		END
-	ELSE 
-		THROW 50001, 'ERROR UPDATING VAULT: SLIPSPACE RUPTURE DETECTED',1
+			INSERT INTO EncryptedVault (Userguid, Sitename, Username, Password)
+				VALUES (@Userguid, @Sitename, @Username, @Password)
+		ELSE 
+			THROW 50001, 'ERROR UPDATING VAULT: SLIPSPACE RUPTURE DETECTED',1
+		
 END
 GO

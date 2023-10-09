@@ -55,7 +55,8 @@ public class PasswordVaultController : ControllerBase
             return validationErrors;
         }
 
-        var vault = DtoConverter<PasswordVaultDto, PasswordVault>.From(vaultDto);
+        var encyptedVault = DtoConverter<HashedCredentialsDto, HashedCredentials>.FromList(vaultDto.EncryptedVault);
+        var vault = new PasswordVault() {OwnerGuid = vaultDto.OwnerGuid, EncryptedVault = encyptedVault};
         var result = await _passwordVaultRepo.UpdateAsync(ownerGuid, vault);
 
         if(!result)
