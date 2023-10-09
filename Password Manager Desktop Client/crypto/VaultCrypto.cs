@@ -3,7 +3,7 @@ using Web_Client.DTOs;
 
 namespace Password_Manager_Desktop_Client.crypto;
 
-internal class VaultCrypto
+public class VaultCrypto : IVaultCrypto
 {
     private string _username;
     private string _password;
@@ -17,10 +17,8 @@ internal class VaultCrypto
         _password = password;
     }
 
-    public PasswordVaultDto EncryptVault()
+    public PasswordVaultDto EncryptVault(PasswordVaultDto vault)
     {
-        //TODO 
-        return new PasswordVaultDto();
+        throw new NotImplementedException();
     }
-
 }

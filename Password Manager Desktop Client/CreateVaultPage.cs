@@ -1,4 +1,5 @@
-﻿using Web_Client;
+﻿using Password_Manager_Desktop_Client.crypto;
+using Web_Client;
 using Web_Client.DTOs;
 
 namespace Password_Manager_Desktop_Client;
@@ -9,14 +10,16 @@ public partial class CreateVaultPage : UserControl
     private Guid _userId;
     private string _username;
     private string _password;
-    private PasswordVaultDto _decriptedVault;
+    private PasswordVaultDto? _decriptedVault;
+    private IVaultCrypto _vaultCryptoHelper;
 
-    public CreateVaultPage(IWebClient client, Guid userId, string username, string password)
+    public CreateVaultPage(IWebClient client, IVaultCrypto vaultCryptoHelper, Guid userId, string username, string password)
     {
         _client = client;
         _userId = userId;
         _username = username;
         _password = password;
+        _vaultCryptoHelper = vaultCryptoHelper;
         InitializeComponent();
     }
 

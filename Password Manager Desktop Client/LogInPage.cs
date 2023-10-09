@@ -1,4 +1,5 @@
 ﻿
+using Password_Manager_Desktop_Client.crypto;
 using Web_Client;
 using Web_Client.DTOs;
 
@@ -9,10 +10,12 @@ public partial class LogInPage : UserControl
     private IWebClient _client;
     private string _username;
     private string _password;
+    private IVaultCrypto _vaultCryptoHelper;
 
-    public LogInPage(IWebClient client)
+    public LogInPage(IWebClient client, IVaultCrypto vaultCryptoHelper)
     {
         _client = client;
+        _vaultCryptoHelper = vaultCryptoHelper;
         _username = "";
         _password = "";
         InitializeComponent();
@@ -45,7 +48,7 @@ public partial class LogInPage : UserControl
         else
         {
             //Load vault page
-            CreateVaultPage createVaultPage = new CreateVaultPage(_client, userId.Value, _username, _password);
+            CreateVaultPage createVaultPage = new CreateVaultPage(_client, _vaultCryptoHelper, userId.Value, _username, _password);
             createVaultPage.Dock = DockStyle.Fill;
         }
 

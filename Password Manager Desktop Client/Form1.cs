@@ -1,3 +1,4 @@
+using Password_Manager_Desktop_Client.crypto;
 using System.Runtime.InteropServices;
 using Web_Client;
 
@@ -9,17 +10,18 @@ public partial class Form1 : Form
     private int _borderSize;
 
     private IWebClient _client;
-
-    public Form1(IWebClient client)
+    private IVaultCrypto _vaultCryptoHelper;
+    public Form1(IWebClient client, IVaultCrypto vaultCryptoHelper)
     {
         _borderSize = 2;
         _client = client;
+        _vaultCryptoHelper = vaultCryptoHelper;
         InitializeComponent();
     }
 
     private void Form1_Load(object sender, EventArgs e)
     {
-        LogInPage createShowPage = new LogInPage(_client);
+        LogInPage createShowPage = new LogInPage(_client, _vaultCryptoHelper);
         createShowPage.Dock = DockStyle.Fill;
         panel1.Controls.Add(createShowPage);
         Padding = new(_borderSize);
