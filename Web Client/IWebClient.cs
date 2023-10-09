@@ -3,7 +3,7 @@
 namespace Web_Client;
 public interface IWebClient
 {
-    Task<int> LoginAsync(UserDto user);
+    Task<Guid?> LoginAsync(UserDto user);
     Task<PasswordVaultDto> GetAsync(Guid ownerGuid);
     Task<bool> UpdateAsync(Guid ownerGuid, PasswordVaultDto vault);
 
