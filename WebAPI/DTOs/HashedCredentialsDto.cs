@@ -2,7 +2,8 @@
 
 public sealed record HashedCredentialsDto
 {
-    public string? Sitename { get; set; }
-    public string? Username { get; set; }
-    public string? Password { get; set; }
+    public byte[]? Sitename { get; set; }
+    public byte[]? Username { get; set; }
+    public byte[]? Password { get; set; }
 }
+//TODO should this be string of byte array 

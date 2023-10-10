@@ -29,6 +29,7 @@
     <setting file="file://$PROJECT_DIR$/Web API/Program.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/2067315463a878cfc2c765b93d9eddb01cd65af4b881c6efea2ed584df14acb4/SqlConnection.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/35e7e538796eca19115e7f3c2f459e1951ae177d47eb48ebbf393bff3ac/Select.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/6879c9ed20391a5ccfea363be5964fbcfe4f1dfde9558aa84b36df6b6ec92c6/List.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/6b89968f9be3c164dca4f9c1b73bdbc28bcf48b41293f4ddd5bfad26a4b46f9/Guid.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/7029bcb5fa91c02b9e89b30801d67e98d89b0de66c74b952f69312e578b4/SqlConnectionHelper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/81a3bcf4bb6aa5e62a9839f9cfeeba6126496f4fa07d1e57b27a5176e42525/ControllerBase.cs" root0="SKIP_HIGHLIGHTING" />
@@ -297,6 +298,8 @@
       <updated>1696235164736</updated>
       <workItem from="1696235177425" duration="8590000" />
       <workItem from="1696839796464" duration="14245000" />
+      <workItem from="1696860989890" duration="1309000" />
+      <workItem from="1696923228301" duration="389000" />
     </task>
     <servers />
   </component>
@@ -324,42 +327,29 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/WebAPI/Controllers/PasswordVaultController.cs</url>
-          <line>30</line>
-          <properties documentPath="C:\University Work\C# Github Repository\Simple Password Manager\WebAPI\Controllers\PasswordVaultController.cs" initialLine="30" containingFunctionPresentation="Method 'Get'">
+          <line>59</line>
+          <properties documentPath="C:\University Work\C# Github Repository\Simple Password Manager\WebAPI\Controllers\PasswordVaultController.cs" initialLine="59" containingFunctionPresentation="Method 'Put'">
             <startOffsets>
-              <option value="1008" />
+              <option value="2044" />
             </startOffsets>
             <endOffsets>
-              <option value="1009" />
+              <option value="2112" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="8" />
+          <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/WebAPI/Controllers/PasswordVaultController.cs</url>
           <line>45</line>
           <properties documentPath="C:\University Work\C# Github Repository\Simple Password Manager\WebAPI\Controllers\PasswordVaultController.cs" initialLine="45" containingFunctionPresentation="Method 'Put'">
             <startOffsets>
-              <option value="1523" />
+              <option value="1525" />
             </startOffsets>
             <endOffsets>
-              <option value="1524" />
+              <option value="1526" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/WebAPI/Controllers/PasswordVaultController.cs</url>
-          <line>71</line>
-          <properties documentPath="C:\University Work\C# Github Repository\Simple Password Manager\WebAPI\Controllers\PasswordVaultController.cs" initialLine="70" containingFunctionPresentation="Method 'GetValidationErrors'">
-            <startOffsets>
-              <option value="2420" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2421" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="10" />
+          <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
