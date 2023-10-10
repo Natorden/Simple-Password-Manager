@@ -45,7 +45,6 @@ public partial class CreateVaultPage : UserControl
     public void AddCredentialsToDto(DecryptedCredentialsDto credentials)
     {
         _decryptedCredentialsDtos.Add(credentials);
-        _ = _parent.ShowSucess("Credentials added to list!");
     }
 
     private void LogOut_Button_Click(object sender, EventArgs e)

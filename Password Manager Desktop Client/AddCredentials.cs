@@ -40,8 +40,9 @@ namespace Password_Manager_Desktop_Client
             _parentUserControl.AddCredentialsToDto(credentialDto);
 
             ClearFields();
-        }
 
+            ShowSuccess("Successfully added the credentials!");
+        }
 
         private void close_Click(object sender, EventArgs e)
         {
@@ -72,5 +73,25 @@ namespace Password_Manager_Desktop_Client
             _cr_password = "";
         }
 
+        public void ShowSuccess(string text)
+        {
+            var successBar = new CustomControls.NotificationLabelBar
+            {
+                BackColor = Color.Green,
+                ButtonColor = Color.Maroon,
+                Dock = DockStyle.Top,
+                Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point),
+                ForeColor = Color.White,
+                Location = new Point(0, 40),
+                Margin = new Padding(5, 5, 5, 5),
+                Name = "notificationLblBar",
+                Size = new Size(Width, 0),
+                Text = text
+            };
+
+            Controls.Add(successBar);
+            successBar.BringToFront();
+            successBar.ShowNotificationAsync(2000);
+        }
     }
 }
