@@ -22,7 +22,9 @@ public class LoginController : ControllerBase
     }
 
     // POST api/login
+    
     [HttpPost]
+    [Route("Login")]
     public async Task<ActionResult<int>> PostAsync([FromBody] UserDto userDto)
     {
         if (userDto.Password == null || userDto.Username == null)
@@ -49,6 +51,24 @@ public class LoginController : ControllerBase
         {
             return NotFound("Invalid username or password");
         }
+    }
+    
+    [HttpPost]
+    [Route("Create")]
+    public async Task<IActionResult> CreateAsync([FromBody] UserDtoNoGuid userDtoNoGuid)
+    {
+        if (userDtoNoGuid.Password == null || userDtoNoGuid.Username == null)
+        {
+            return BadRequest("Username or Password cannot be null");
+        }
+
+        var user = DtoConverter<UserDtoNoGuid, User>.From(userDtoNoGuid);
+        bool returnedId = await _userRepo.CreateAsync(user);
+        if ( !returnedId)
+        {
+            return BadRequest();
+        }
+        return NoContent();
     }
 
 

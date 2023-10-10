@@ -39,7 +39,6 @@ internal class PasswordVaultRepo : IPasswordVaultRepo
 
         if (vault.EncryptedVault == null)
             return false;
-        
         try{
             foreach(var credential in vault.EncryptedVault) 
             {
@@ -56,7 +55,6 @@ internal class PasswordVaultRepo : IPasswordVaultRepo
         {
             return false;
         }
-
         return true;
     }
 }

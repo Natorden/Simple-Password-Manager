@@ -20,10 +20,32 @@ internal class UserRepo : IUserRepo
         using var connection = new SqlConnection(_connectionString);
         //Set up DynamicParameters object to pass parameters  
         DynamicParameters parameters = new DynamicParameters();   
+        
         parameters.Add("Username", user.Username);  
         parameters.Add("Password", user.Password);  
             
         //Execute stored procedure and map the returned result to a Customer object  
         return await connection.QuerySingleOrDefaultAsync<Guid?>("USER_MASTER_LOGIN", parameters, commandType: CommandType.StoredProcedure);
+    }
+
+    public async Task<bool> CreateAsync(User user)
+    {
+        using var connection = new SqlConnection(_connectionString);
+        Guid g = Guid.NewGuid();
+        
+        try{
+                DynamicParameters parameters = new DynamicParameters(); 
+                parameters.Add("Userguid", g);
+                parameters.Add("Username", user.Username);  
+                parameters.Add("Password", user.Password); 
+                
+                await connection.QueryAsync("USER_MASTER_CREATE", parameters, commandType: CommandType.StoredProcedure);
+
+                return true;
+        }
+        catch
+        {
+            return false;
+        }
     }
 }

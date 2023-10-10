@@ -299,7 +299,8 @@
       <workItem from="1696235177425" duration="8590000" />
       <workItem from="1696839796464" duration="14245000" />
       <workItem from="1696860989890" duration="1309000" />
-      <workItem from="1696923228301" duration="389000" />
+      <workItem from="1696923228301" duration="1495000" />
+      <workItem from="1696928989933" duration="1271000" />
     </task>
     <servers />
   </component>
@@ -314,42 +315,16 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/WebAPI/Controllers/LoginController.cs</url>
-          <line>26</line>
+          <line>28</line>
           <properties documentPath="C:\University Work\C# Github Repository\Simple Password Manager\WebAPI\Controllers\LoginController.cs" initialLine="26" containingFunctionPresentation="Method 'PostAsync'">
             <startOffsets>
-              <option value="792" />
+              <option value="818" />
             </startOffsets>
             <endOffsets>
-              <option value="793" />
+              <option value="819" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/WebAPI/Controllers/PasswordVaultController.cs</url>
-          <line>59</line>
-          <properties documentPath="C:\University Work\C# Github Repository\Simple Password Manager\WebAPI\Controllers\PasswordVaultController.cs" initialLine="59" containingFunctionPresentation="Method 'Put'">
-            <startOffsets>
-              <option value="2044" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2112" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/WebAPI/Controllers/PasswordVaultController.cs</url>
-          <line>45</line>
-          <properties documentPath="C:\University Work\C# Github Repository\Simple Password Manager\WebAPI\Controllers\PasswordVaultController.cs" initialLine="45" containingFunctionPresentation="Method 'Put'">
-            <startOffsets>
-              <option value="1525" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1526" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

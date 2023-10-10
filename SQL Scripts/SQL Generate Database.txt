@@ -30,7 +30,7 @@ GO
 CREATE TABLE [dbo].[User](
 	[Guid] [uniqueidentifier] NOT NULL,
 	[Username] [nvarchar](255) NOT NULL,
-	[Password] [nvarchar](255) NOT NULL,
+	[Password] [binary](2000) NOT NULL,
  CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED 
 (
 	[Guid] ASC

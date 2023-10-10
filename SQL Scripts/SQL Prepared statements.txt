@@ -69,3 +69,27 @@ BEGIN
 		
 END
 GO
+
+CREATE OR ALTER PROCEDURE USER_MASTER_CREATE 
+	-- Add the parameters for the stored procedure here
+	@Guid uniqueidentifier = null,
+	@Username nvarchar(255) = null,
+	@Password binary(2000) = null,
+	@Salt nvarchar(255) = null
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	IF @Guid IS NOT NULL
+		IF EXISTS (SELECT 1 FROM [User] WHERE Guid = @Guid)
+			UPDATE [User] SET Guid = @Guid, Username = @Username, Password = @Password, Salt = @Salt
+		ELSE 
+			INSERT INTO [User] (Guid, Username, Password, Salt)
+				VALUES (@Guid, @Username, @Password, @Salt)
+		ELSE 
+			THROW 50001, 'ERROR UPDATING VAULT: SLIPSPACE RUPTURE DETECTED',1
+END
+GO
