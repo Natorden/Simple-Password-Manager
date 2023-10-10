@@ -8,7 +8,7 @@ using System.ComponentModel;
 namespace Password_Manager_Desktop_Client.CustomControls;
 public partial class NotificationLabelBar : UserControl
 {
-    private readonly int _height;
+    private int _height;
     private AnimationStatus _animationStatus;
 
     [Browsable(true), EditorBrowsable(EditorBrowsableState.Always), Bindable(true)]
@@ -41,6 +41,7 @@ public partial class NotificationLabelBar : UserControl
 
     public async Task ShowNotificationAsync(int milis = 1000)
     {
+        _height = TextRenderer.MeasureText(lblMessage.Text, lblMessage.Font).Height;
         if (!_animationStatus.IsCompleted) { return; }
         _animationStatus = this.Animate(new TopAnchoredHeightEffect(), EasingFunctions.BackEaseOut, _height, 1000, 0);
         await Task.Delay(milis);

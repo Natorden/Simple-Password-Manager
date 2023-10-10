@@ -24,17 +24,24 @@ public partial class LogInPage : UserControl
         string password = passwordTextBox.Text;
         string username = usernameTextBox.Text;
 
-        var _userDTO = CreateUserDTO(username, password);
-        var userId = await _client.LoginAsync(_userDTO);
-        if (userId.HasValue)
+        try
         {
-            _ = _parent.ShowError("Error logging in!");
+            var _userDTO = CreateUserDTO(username, password);
+            var userId = await _client.LoginAsync(_userDTO);
+            if (userId.HasValue)
+            {
+                _ = _parent.ShowError("Error logging in!");
+            }
+            else
+            {
+                //Load vault page
+                var createVaultPage = new CreateVaultPage(_client, _vaultCryptoHelper, userId.Value, username, password);
+                createVaultPage.Dock = DockStyle.Fill;
+            }
         }
-        else
+        catch
         {
-            //Load vault page
-            var createVaultPage = new CreateVaultPage(_client, _vaultCryptoHelper, userId.Value, username, password);
-            createVaultPage.Dock = DockStyle.Fill;
+            _ = _parent.ShowError("Something went wrong! Check your connection\n and try again.");
         }
 
     }
