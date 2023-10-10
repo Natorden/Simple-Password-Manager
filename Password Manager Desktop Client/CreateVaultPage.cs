@@ -32,6 +32,10 @@ public partial class CreateVaultPage : UserControl
         listView1.Columns.Add("Sitename");
         listView1.Columns.Add("Username");
         listView1.Columns.Add("Password");
+
+        listView1.Columns[0].Width = 130; 
+        listView1.Columns[1].Width = 130; 
+        listView1.Columns[2].Width = 130; 
     }
 
     private async void CreateVaultPage_Load(object sender, EventArgs e)
@@ -51,12 +55,36 @@ public partial class CreateVaultPage : UserControl
     public void AddCredentialsToDto(DecryptedCredentialsDto credentials)
     {
         _decryptedCredentialsDtos.Add(credentials);
-        UpdateListView();
+        UpdateListView(credentials);
     }
 
-    private void UpdateListView()
+    private void UpdateListView(DecryptedCredentialsDto credentialsDto)
     {
-        foreach(var credential in _decryptedCredentialsDtos)
+         ListViewItem item = new ListViewItem(credentialsDto.Sitename);
+         item.SubItems.Add(credentialsDto.Username);
+         item.SubItems.Add(credentialsDto.Password);
+         
+         listView1.Items.Add(item);
+    }
+
+    private void HideItems()
+    {
+        foreach (ListViewItem item in listView1.Items)
+        {
+            item.Text = new string('*', 7);
+            item.SubItems[1].Text = new string('*', 7);
+            item.SubItems[2].Text = new string('*', 7);
+        }
+    }
+
+    private void ClearListView()
+    {
+        listView1.Items.Clear();
+    }
+
+    private void InitListView()
+    {
+        foreach(var credential in _vault.DecryptedVault)
         {
             ListViewItem item = new ListViewItem(credential.Sitename);
             item.SubItems.Add(credential.Username);
@@ -70,6 +98,8 @@ public partial class CreateVaultPage : UserControl
     private void LogOut_Button_Click(object sender, EventArgs e)
     {
         //TODO log out user
+        _parent.Controls.Remove(this);
+        this.Hide();
     }
 
     private void Encrypt_Click(object sender, EventArgs e)
@@ -85,11 +115,14 @@ public partial class CreateVaultPage : UserControl
         var encrypted = _vaultCryptoService.EncryptVault(vault, _username, _password);
         _vault = encrypted;
         _vault.DecryptedVault = new List<DecryptedCredentialsDto>();
+        HideItems();
     }
 
     private void Decrypt_Click(object sender, EventArgs e)
     {
         var decrypted = _vaultCryptoService.DecryptVault(_vault, _username, _password);
         _vault = decrypted;
+        ClearListView();
+        InitListView();
     }
 }
