@@ -49,11 +49,12 @@ public class VaultCrypto : IVaultCrypto
     {
         if (vault != null || vault.EncryptedVault.Any())
         {
+            List<DecryptedCredentialsDto> decrypredCredentialsDtos = new();
             foreach (var credentials in vault.EncryptedVault)
             {
-                var encryptedCredential = new DecryptedCredentialsDto();
+                var decryptedCredential = new DecryptedCredentialsDto();
 
-                foreach (var property in typeof(DecryptedCredentialsDto).GetProperties())
+                foreach (var property in typeof(HashedCredentialsDto).GetProperties())
                 {
                     var encryptedProp = (byte[])property.GetValue(credentials);
 
@@ -66,11 +67,12 @@ public class VaultCrypto : IVaultCrypto
 
                         string decryptedProperty = Encoding.UTF8.GetString(decryptedPropertyByteArr);
                         var propertyName = property.Name;
-                        typeof(HashedCredentialsDto).GetProperty(propertyName)?.SetValue(encryptedCredential, decryptedProperty);
+                        typeof(DecryptedCredentialsDto).GetProperty(propertyName)?.SetValue(decryptedCredential, decryptedProperty);
                     }
                 }
-                vault.DecryptedVault?.Append(encryptedCredential);
+                decrypredCredentialsDtos.Add(decryptedCredential);
             }
+            vault.DecryptedVault = decrypredCredentialsDtos;
             return vault;
         }
         else
@@ -79,11 +81,9 @@ public class VaultCrypto : IVaultCrypto
         }
     }
 
-
-
     public byte[] RetrieveSalt(byte[] property)
     {
-        byte[] salt = property.Take(100).ToArray();
+        byte[] salt = property.Take(16).ToArray();
         return salt;
     }
 
