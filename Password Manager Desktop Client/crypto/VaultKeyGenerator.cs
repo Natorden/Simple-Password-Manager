@@ -28,7 +28,7 @@ internal static class VaultKeyGenerator
         argon2id.Iterations = 4;
         argon2id.MemorySize = 128;
 
-        return argon2id.GetBytes(256);
+        return argon2id.GetBytes(32);
     }
 
     public static byte[] ConcatenateByteArrays(byte[] byteArr1, byte[] byteArr2)

@@ -11,6 +11,8 @@ public class VaultCrypto : IVaultCrypto
     {
             if (vault != null || vault.DecryptedVault.Any())
             {
+            List<HashedCredentialsDto> encrypedCredentialsDtos = new();
+
                 foreach (var credentials in vault.DecryptedVault)
                 {
                 var encryptedCredential = new HashedCredentialsDto();
@@ -27,11 +29,15 @@ public class VaultCrypto : IVaultCrypto
                         
                         var propertyName = property.Name;
                         typeof(HashedCredentialsDto).GetProperty(propertyName)?.SetValue(encryptedCredential, encryptedProperty);
+                        
                         }
+
                     }
-                vault.EncryptedVault?.Append(encryptedCredential);
+                encrypedCredentialsDtos.Add(encryptedCredential);
+                
                 }
-                return vault;
+            vault.EncryptedVault = encrypedCredentialsDtos;
+            return vault;
             }
             else
             {
@@ -73,19 +79,21 @@ public class VaultCrypto : IVaultCrypto
         }
     }
 
-    public static byte[] RetrieveSalt(byte[] property)
+
+
+    public byte[] RetrieveSalt(byte[] property)
     {
         byte[] salt = property.Take(100).ToArray();
         return salt;
     }
 
-    public static byte[] DeriveSecterKey(string username, string password, byte[] salt)
+    public byte[] DeriveSecterKey(string username, string password, byte[] salt)
     {
         var secretKey = VaultKeyGenerator.GenerateVaultKey(username, password, salt);
         return secretKey;
     }
 
-    public static byte[] EncryptProperty(string plainText, byte[] key, byte[] salt)
+    public byte[] EncryptProperty(string plainText, byte[] key, byte[] salt)
     {
         using var aes = new AesGcm(key);
 
@@ -100,13 +108,13 @@ public class VaultCrypto : IVaultCrypto
         return encryptedProp;
     }
 
-    public static byte[] DecryptProperty(byte[] encryptedProp, byte[] key)
+    public byte[] DecryptProperty(byte[] encryptedProp, byte[] key)
     {
         using var aes = new AesGcm(key);
 
-        var nonce = encryptedProp.Skip(100).Take(12).ToArray();
-        var tag = encryptedProp.Skip(112).Take(16).ToArray();
-        var textToDecrypt = encryptedProp.Skip(128).ToArray();
+        var nonce = encryptedProp.Skip(16).Take(12).ToArray();
+        var tag = encryptedProp.Skip(28).Take(16).ToArray();
+        var textToDecrypt = encryptedProp.Skip(44).ToArray();
         var decryptedProp = new byte[textToDecrypt.Length];
 
         aes.Decrypt(nonce: nonce, ciphertext: textToDecrypt, tag: tag, plaintext: decryptedProp);
@@ -114,9 +122,9 @@ public class VaultCrypto : IVaultCrypto
         return decryptedProp;
     }
 
-    public static byte[] GenerateSalt()
+    public byte[] GenerateSalt()
     {
-        var buffer = new byte[100];
+        var buffer = new byte[16];
 
         RNGCryptoServiceProvider rng = new();
 
@@ -125,7 +133,7 @@ public class VaultCrypto : IVaultCrypto
         return buffer;
     }
 
-    public static byte[] ConcatCypher(byte[] salt, byte[] nonce, byte[] tag, byte[] cypher)
+    public byte[] ConcatCypher(byte[] salt, byte[] nonce, byte[] tag, byte[] cypher)
     {
         return salt.Concat(nonce).Concat(tag).Concat(cypher).ToArray();
     }
