@@ -25,5 +25,29 @@ namespace Password_Manager_Desktop_Client
             InitializeComponent();
         }
 
+        private void siteName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void userName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void password_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void add_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void close_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
