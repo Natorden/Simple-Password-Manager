@@ -35,7 +35,7 @@ public partial class LogInPage : UserControl
             else
             {
                 //Load vault page
-                var createVaultPage = new CreateVaultPage(_client, _vaultCryptoHelper, userId.Value, username, password);
+                var createVaultPage = new CreateVaultPage(_client, _vaultCryptoHelper, userId.Value, username, password, _parent);
                 createVaultPage.Dock = DockStyle.Fill;
             }
         }
