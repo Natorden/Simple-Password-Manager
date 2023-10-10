@@ -28,52 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.CredentialsGridView = new System.Windows.Forms.DataGridView();
-            this.Site_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Username = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Password = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AddNewPassword_Button = new System.Windows.Forms.Button();
             this.logOut_Button = new System.Windows.Forms.Button();
             this.Encrypt = new System.Windows.Forms.Button();
             this.decrypt = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.CredentialsGridView)).BeginInit();
+            this.listView1 = new System.Windows.Forms.ListView();
             this.SuspendLayout();
-            // 
-            // CredentialsGridView
-            // 
-            this.CredentialsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.CredentialsGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Site_name,
-            this.Username,
-            this.Password});
-            this.CredentialsGridView.Location = new System.Drawing.Point(3, 76);
-            this.CredentialsGridView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.CredentialsGridView.Name = "CredentialsGridView";
-            this.CredentialsGridView.RowHeadersWidth = 51;
-            this.CredentialsGridView.RowTemplate.Height = 29;
-            this.CredentialsGridView.Size = new System.Drawing.Size(377, 298);
-            this.CredentialsGridView.TabIndex = 0;
-            // 
-            // Site_name
-            // 
-            this.Site_name.HeaderText = "Site name";
-            this.Site_name.MinimumWidth = 6;
-            this.Site_name.Name = "Site_name";
-            this.Site_name.Width = 125;
-            // 
-            // Username
-            // 
-            this.Username.HeaderText = "Username";
-            this.Username.MinimumWidth = 6;
-            this.Username.Name = "Username";
-            this.Username.Width = 125;
-            // 
-            // Password
-            // 
-            this.Password.HeaderText = "Password";
-            this.Password.MinimumWidth = 6;
-            this.Password.Name = "Password";
-            this.Password.Width = 125;
             // 
             // AddNewPassword_Button
             // 
@@ -119,33 +79,36 @@
             this.decrypt.UseVisualStyleBackColor = true;
             this.decrypt.Click += new System.EventHandler(this.Decrypt_Click);
             // 
+            // listView1
+            // 
+            this.listView1.Location = new System.Drawing.Point(20, 67);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(346, 291);
+            this.listView1.TabIndex = 5;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            // 
             // CreateVaultPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.listView1);
             this.Controls.Add(this.decrypt);
             this.Controls.Add(this.Encrypt);
             this.Controls.Add(this.logOut_Button);
             this.Controls.Add(this.AddNewPassword_Button);
-            this.Controls.Add(this.CredentialsGridView);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "CreateVaultPage";
             this.Size = new System.Drawing.Size(382, 376);
             this.Load += new System.EventHandler(this.CreateVaultPage_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.CredentialsGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private DataGridView CredentialsGridView;
-        private DataGridViewTextBoxColumn Site_name;
-        private DataGridViewTextBoxColumn Username;
-        private DataGridViewTextBoxColumn Password;
         private Button AddNewPassword_Button;
         private Button logOut_Button;
         private Button Encrypt;
         private Button decrypt;
+        private ListView listView1;
     }
 }

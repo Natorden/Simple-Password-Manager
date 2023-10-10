@@ -1,4 +1,6 @@
 ﻿using Password_Manager_Desktop_Client.crypto;
+using System.ComponentModel;
+using System.Net;
 using Web_Client;
 using Web_Client.DTOs;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
@@ -26,6 +28,10 @@ public partial class CreateVaultPage : UserControl
         _vaultCryptoService = vaultCryptoService;
         _parent = parent;
         InitializeComponent();
+        listView1.View = View.Details;
+        listView1.Columns.Add("Sitename");
+        listView1.Columns.Add("Username");
+        listView1.Columns.Add("Password");
     }
 
     private async void CreateVaultPage_Load(object sender, EventArgs e)
@@ -45,6 +51,20 @@ public partial class CreateVaultPage : UserControl
     public void AddCredentialsToDto(DecryptedCredentialsDto credentials)
     {
         _decryptedCredentialsDtos.Add(credentials);
+        UpdateListView();
+    }
+
+    private void UpdateListView()
+    {
+        foreach(var credential in _decryptedCredentialsDtos)
+        {
+            ListViewItem item = new ListViewItem(credential.Sitename);
+            item.SubItems.Add(credential.Username);
+            item.SubItems.Add(credential.Password);
+
+            listView1.Items.Add(item);
+        }
+        
     }
 
     private void LogOut_Button_Click(object sender, EventArgs e)
