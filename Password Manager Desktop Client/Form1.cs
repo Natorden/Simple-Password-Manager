@@ -41,6 +41,29 @@ public partial class Form1 : Form
         await errorBar.ShowNotificationAsync(2000);
     }
 
+
+    public async Task ShowSucess(string text)
+    {
+        var sucessBar = new CustomControls.NotificationLabelBar
+        {
+            BackColor = Color.Green,
+            ButtonColor = Color.Maroon,
+            Dock = DockStyle.Top,
+            Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point),
+            ForeColor = Color.White,
+            Location = new Point(0, 40),
+            Margin = new Padding(5, 5, 5, 5),
+            Name = "notificationLblBar",
+            Size = new Size(884, 0),
+            TabIndex = 4,
+            Text = text
+        };
+
+        panel1.Controls.Add(sucessBar);
+        sucessBar.BringToFront();
+        await sucessBar.ShowNotificationAsync(2000);
+    }
+
     private void Form1_Load(object sender, EventArgs e)
     {
         SetPage(new LogInPage(_client, _vaultCryptoHelper, parent: this));
