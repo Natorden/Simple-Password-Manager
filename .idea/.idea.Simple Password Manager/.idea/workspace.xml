@@ -300,7 +300,7 @@
       <workItem from="1696839796464" duration="14245000" />
       <workItem from="1696860989890" duration="1309000" />
       <workItem from="1696923228301" duration="1495000" />
-      <workItem from="1696928989933" duration="1271000" />
+      <workItem from="1696928989933" duration="1607000" />
     </task>
     <servers />
   </component>
@@ -309,24 +309,5 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/WebAPI/Controllers/LoginController.cs</url>
-          <line>28</line>
-          <properties documentPath="C:\University Work\C# Github Repository\Simple Password Manager\WebAPI\Controllers\LoginController.cs" initialLine="26" containingFunctionPresentation="Method 'PostAsync'">
-            <startOffsets>
-              <option value="818" />
-            </startOffsets>
-            <endOffsets>
-              <option value="819" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

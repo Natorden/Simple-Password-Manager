@@ -17,6 +17,29 @@ END
 GO
 
 
+CREATE OR ALTER PROCEDURE USER_MASTER_CREATE 
+	-- Add the parameters for the stored procedure here
+	@Guid uniqueidentifier = null,
+	@Username nvarchar(255) = null,
+	@Password binary(2000) = null,
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	IF @Guid IS NOT NULL
+		IF EXISTS (SELECT 1 FROM [User] WHERE Guid = @Guid)
+			UPDATE [User] SET Guid = @Guid, Username = @Username, Password = @Password
+		ELSE 
+			INSERT INTO [User] (Guid, Username, Password)
+				VALUES (@Guid, @Username, @Password)
+		ELSE 
+			THROW 50001, 'ERROR UPDATING VAULT: SLIPSPACE RUPTURE DETECTED',1
+END
+GO
+
 
 /****** Creates a prepared statement that fetches passwords from the password manager ******/
 
@@ -30,12 +53,11 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-	IF @UserGuID IS NOT NULL
-		SELECT E.Sitename, E.Username, E.Password AS UserVault 
+	IF @ownerGuid IS NOT NULL
+		SELECT U.Guid, E.Sitename, E.Username, E.Password
 		FROM EncryptedVault E 
-			JOIN UserEncryptedVault UE ON UE.VaultSitename = E.Sitename
-			JOIN [User] U ON U.Guid = UE.UserGuid
-		WHERE UE.UserGuid = @UserGuID
+			JOIN [User] U ON U.Guid = E.Userguid
+		WHERE E.Userguid = @ownerGuid
 	ELSE 
 		THROW 50001, 'Error fetching vault',1
 END
@@ -70,26 +92,4 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE USER_MASTER_CREATE 
-	-- Add the parameters for the stored procedure here
-	@Guid uniqueidentifier = null,
-	@Username nvarchar(255) = null,
-	@Password binary(2000) = null,
-	@Salt nvarchar(255) = null
-AS
-BEGIN
-	-- SET NOCOUNT ON added to prevent extra result sets from
-	-- interfering with SELECT statements.
-	SET NOCOUNT ON;
 
-    -- Insert statements for procedure here
-	IF @Guid IS NOT NULL
-		IF EXISTS (SELECT 1 FROM [User] WHERE Guid = @Guid)
-			UPDATE [User] SET Guid = @Guid, Username = @Username, Password = @Password, Salt = @Salt
-		ELSE 
-			INSERT INTO [User] (Guid, Username, Password, Salt)
-				VALUES (@Guid, @Username, @Password, @Salt)
-		ELSE 
-			THROW 50001, 'ERROR UPDATING VAULT: SLIPSPACE RUPTURE DETECTED',1
-END
-GO
