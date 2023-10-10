@@ -8,17 +8,13 @@ internal static class VaultKeyGenerator
 {
     public static byte[] GenerateVaultKey(string username, string password, byte[] salt)
     {
-        //TODO generate vault key from username and password
-        //TODO Make this key 256 bytes insted of random lenght
         byte[] usernameBytes = Encoding.UTF8.GetBytes(username);
         byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
 
         var firstKeyByteArr = ConcatenateByteArrays(usernameBytes, passwordBytes);
-
         var singleHashedKey = HashKey(firstKeyByteArr, salt);
 
         var secondKeyByteArr = ConcatenateByteArrays(singleHashedKey, passwordBytes);
-
         var doubleHashedKey = HashKey(secondKeyByteArr, salt);
 
         return doubleHashedKey;

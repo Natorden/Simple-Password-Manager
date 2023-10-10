@@ -1,8 +1,6 @@
-﻿using System.Diagnostics.Contracts;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
 using Web_Client.DTOs;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Password_Manager_Desktop_Client.crypto;
 
@@ -30,7 +28,6 @@ public class VaultCrypto : IVaultCrypto
                         var encryptedProperty = EncryptProperty(propertyValue, secretKey, salt);
                         
                         var propertyName = property.Name;
-
                         typeof(HashedCredentialsDto).GetProperty(propertyName)?.SetValue(encryptedCredential, encryptedProperty);
                         }
                     }
@@ -68,7 +65,9 @@ public class VaultCrypto : IVaultCrypto
     public static byte[] GenerateSalt()
     {
         var buffer = new byte[100];
+
         RNGCryptoServiceProvider rng = new();
+
         rng.GetBytes(buffer);
 
         return buffer;
