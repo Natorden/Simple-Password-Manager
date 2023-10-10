@@ -34,6 +34,8 @@
             this.Password = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AddNewPassword_Button = new System.Windows.Forms.Button();
             this.logOut_Button = new System.Windows.Forms.Button();
+            this.Encrypt = new System.Windows.Forms.Button();
+            this.decrypt = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.CredentialsGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -44,11 +46,12 @@
             this.Site_name,
             this.Username,
             this.Password});
-            this.CredentialsGridView.Location = new System.Drawing.Point(3, 102);
+            this.CredentialsGridView.Location = new System.Drawing.Point(3, 76);
+            this.CredentialsGridView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CredentialsGridView.Name = "CredentialsGridView";
             this.CredentialsGridView.RowHeadersWidth = 51;
             this.CredentialsGridView.RowTemplate.Height = 29;
-            this.CredentialsGridView.Size = new System.Drawing.Size(431, 397);
+            this.CredentialsGridView.Size = new System.Drawing.Size(377, 298);
             this.CredentialsGridView.TabIndex = 0;
             // 
             // Site_name
@@ -74,9 +77,10 @@
             // 
             // AddNewPassword_Button
             // 
-            this.AddNewPassword_Button.Location = new System.Drawing.Point(72, 38);
+            this.AddNewPassword_Button.Location = new System.Drawing.Point(20, 28);
+            this.AddNewPassword_Button.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.AddNewPassword_Button.Name = "AddNewPassword_Button";
-            this.AddNewPassword_Button.Size = new System.Drawing.Size(94, 29);
+            this.AddNewPassword_Button.Size = new System.Drawing.Size(82, 22);
             this.AddNewPassword_Button.TabIndex = 1;
             this.AddNewPassword_Button.Text = "Add new";
             this.AddNewPassword_Button.UseVisualStyleBackColor = true;
@@ -84,23 +88,49 @@
             // 
             // logOut_Button
             // 
-            this.logOut_Button.Location = new System.Drawing.Point(274, 38);
+            this.logOut_Button.Location = new System.Drawing.Point(284, 28);
+            this.logOut_Button.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.logOut_Button.Name = "logOut_Button";
-            this.logOut_Button.Size = new System.Drawing.Size(94, 29);
+            this.logOut_Button.Size = new System.Drawing.Size(82, 22);
             this.logOut_Button.TabIndex = 2;
             this.logOut_Button.Text = "Log out";
             this.logOut_Button.UseVisualStyleBackColor = true;
             this.logOut_Button.Click += new System.EventHandler(this.LogOut_Button_Click);
             // 
+            // Encrypt
+            // 
+            this.Encrypt.Location = new System.Drawing.Point(108, 28);
+            this.Encrypt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Encrypt.Name = "Encrypt";
+            this.Encrypt.Size = new System.Drawing.Size(82, 22);
+            this.Encrypt.TabIndex = 3;
+            this.Encrypt.Text = "Encrypt";
+            this.Encrypt.UseVisualStyleBackColor = true;
+            this.Encrypt.Click += new System.EventHandler(this.Encrypt_Click);
+            // 
+            // decrypt
+            // 
+            this.decrypt.Location = new System.Drawing.Point(196, 28);
+            this.decrypt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.decrypt.Name = "decrypt";
+            this.decrypt.Size = new System.Drawing.Size(82, 22);
+            this.decrypt.TabIndex = 4;
+            this.decrypt.Text = "Decrypt";
+            this.decrypt.UseVisualStyleBackColor = true;
+            this.decrypt.Click += new System.EventHandler(this.Decrypt_Click);
+            // 
             // CreateVaultPage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.decrypt);
+            this.Controls.Add(this.Encrypt);
             this.Controls.Add(this.logOut_Button);
             this.Controls.Add(this.AddNewPassword_Button);
             this.Controls.Add(this.CredentialsGridView);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "CreateVaultPage";
-            this.Size = new System.Drawing.Size(437, 502);
+            this.Size = new System.Drawing.Size(382, 376);
             this.Load += new System.EventHandler(this.CreateVaultPage_Load);
             ((System.ComponentModel.ISupportInitialize)(this.CredentialsGridView)).EndInit();
             this.ResumeLayout(false);
@@ -115,5 +145,7 @@
         private DataGridViewTextBoxColumn Password;
         private Button AddNewPassword_Button;
         private Button logOut_Button;
+        private Button Encrypt;
+        private Button decrypt;
     }
 }
