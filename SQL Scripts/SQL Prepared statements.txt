@@ -1,9 +1,9 @@
 /****** Creates a prepared statement that logs in to the password manager and returns the user id which will be used later on ******/
 
-CREATE PROCEDURE USER_MASTER_LOGIN 
+CREATE OR ALTER PROCEDURE USER_MASTER_LOGIN 
 	-- Add the parameters for the stored procedure here
 	@Username nvarchar(255)= null,
-	@Password nvarchar(255)= null
+	@Password binary(2000) = null
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -45,7 +45,7 @@ GO
 
 CREATE OR ALTER PROCEDURE GET_VAULT 
 	-- Add the parameters for the stored procedure here
-	@UserGuID uniqueidentifier = null
+	@ownerGuid uniqueidentifier = null
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -68,10 +68,10 @@ GO
 
 CREATE PROCEDURE CREATE_VAULT 
 	-- Add the parameters for the stored procedure here
-	@UserGuID uniqueidentifier = null,
-	@Sitename nvarchar(255)= null,
-	@Username nvarchar(255)= null,
-	@Password nvarchar(255)= null
+	@Userguid uniqueidentifier = null,
+	@Sitename binary(2000) = null,
+	@Username binary(2000) = null,
+	@Password binary(2000) = null
 
 AS
 BEGIN
