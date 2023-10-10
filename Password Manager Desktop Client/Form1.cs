@@ -1,4 +1,5 @@
 using Password_Manager_Desktop_Client.crypto;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using Web_Client;
 
@@ -19,14 +20,40 @@ public partial class Form1 : Form
         InitializeComponent();
     }
 
+    public async Task ShowError(string text)
+    {
+        var errorBar = new CustomControls.NotificationLabelBar
+        {
+            BackColor = Color.IndianRed,
+            ButtonColor = Color.Maroon,
+            Dock = DockStyle.Top,
+            Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point),
+            ForeColor = Color.White,
+            Location = new Point(0, 40),
+            Margin = new Padding(5, 5, 5, 5),
+            Name = "notificationLblBar",
+            Size = new Size(884, 0),
+            TabIndex = 4,
+            Text = text
+        };
+        panel1.Controls.Add(errorBar);
+        errorBar.BringToFront();
+        await errorBar.ShowNotificationAsync(2000);
+    }
+
     private void Form1_Load(object sender, EventArgs e)
     {
-        LogInPage createShowPage = new LogInPage(_client, _vaultCryptoHelper);
-        createShowPage.Dock = DockStyle.Fill;
-        panel1.Controls.Add(createShowPage);
+        SetPage(new LogInPage(_client, _vaultCryptoHelper, parent: this));
         Padding = new(_borderSize);
         titleLbl.Text = this.Text;
         MaximizedBounds = Screen.FromHandle(Handle).WorkingArea;
+    }
+
+    public void SetPage(Control pagePanel)
+    {
+        pagePanel.Dock = DockStyle.Fill;
+        panel1.Controls.Clear();
+        panel1.Controls.Add(pagePanel);
     }
 
     private void Exit()

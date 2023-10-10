@@ -33,15 +33,19 @@
             this.usernameTextBox = new System.Windows.Forms.TextBox();
             this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.mainPanel = new System.Windows.Forms.Panel();
+            this.lineBreak = new System.Windows.Forms.Label();
+            this.mainPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // userName_label
             // 
             this.userName_label.AutoSize = true;
             this.userName_label.Dock = System.Windows.Forms.DockStyle.Top;
-            this.userName_label.Location = new System.Drawing.Point(100, 100);
+            this.userName_label.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.userName_label.Location = new System.Drawing.Point(50, 100);
             this.userName_label.Name = "userName_label";
-            this.userName_label.Size = new System.Drawing.Size(75, 20);
+            this.userName_label.Size = new System.Drawing.Size(117, 31);
             this.userName_label.TabIndex = 0;
             this.userName_label.Text = "Username";
             // 
@@ -49,57 +53,102 @@
             // 
             this.masterPassword_label.AutoSize = true;
             this.masterPassword_label.Dock = System.Windows.Forms.DockStyle.Top;
-            this.masterPassword_label.Location = new System.Drawing.Point(100, 147);
+            this.masterPassword_label.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.masterPassword_label.Location = new System.Drawing.Point(50, 161);
             this.masterPassword_label.Name = "masterPassword_label";
-            this.masterPassword_label.Size = new System.Drawing.Size(119, 20);
+            this.masterPassword_label.Size = new System.Drawing.Size(187, 31);
             this.masterPassword_label.TabIndex = 1;
             this.masterPassword_label.Text = "Master Password";
             // 
             // usernameTextBox
             // 
+            this.usernameTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.usernameTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.HistoryList;
+            this.usernameTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(65)))));
+            this.usernameTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.usernameTextBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.usernameTextBox.Location = new System.Drawing.Point(100, 120);
+            this.usernameTextBox.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.usernameTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.usernameTextBox.Location = new System.Drawing.Point(50, 131);
             this.usernameTextBox.MaximumSize = new System.Drawing.Size(250, 0);
             this.usernameTextBox.Name = "usernameTextBox";
-            this.usernameTextBox.Size = new System.Drawing.Size(250, 27);
+            this.usernameTextBox.PlaceholderText = "Name";
+            this.usernameTextBox.Size = new System.Drawing.Size(250, 30);
             this.usernameTextBox.TabIndex = 2;
-            this.usernameTextBox.TextChanged += new System.EventHandler(this.UsernameText_Changed);
             // 
             // passwordTextBox
             // 
+            this.passwordTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(65)))));
+            this.passwordTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.passwordTextBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.passwordTextBox.Location = new System.Drawing.Point(100, 167);
+            this.passwordTextBox.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.passwordTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.passwordTextBox.Location = new System.Drawing.Point(50, 192);
             this.passwordTextBox.MaximumSize = new System.Drawing.Size(250, 0);
             this.passwordTextBox.Name = "passwordTextBox";
-            this.passwordTextBox.Size = new System.Drawing.Size(250, 27);
+            this.passwordTextBox.PasswordChar = '*';
+            this.passwordTextBox.PlaceholderText = "Password";
+            this.passwordTextBox.Size = new System.Drawing.Size(250, 30);
             this.passwordTextBox.TabIndex = 3;
-            this.passwordTextBox.TextChanged += new System.EventHandler(this.PasswordText_Changed);
+            this.passwordTextBox.UseSystemPasswordChar = true;
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(33)))), ((int)(((byte)(37)))));
             this.button1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button1.Location = new System.Drawing.Point(100, 194);
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(33)))), ((int)(((byte)(37)))));
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Highlight;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(30)))));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button1.Location = new System.Drawing.Point(50, 242);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(689, 29);
+            this.button1.Size = new System.Drawing.Size(769, 35);
             this.button1.TabIndex = 4;
             this.button1.Text = "Log In";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.LogInButton_Clicked);
+            // 
+            // mainPanel
+            // 
+            this.mainPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(50)))));
+            this.mainPanel.Controls.Add(this.button1);
+            this.mainPanel.Controls.Add(this.lineBreak);
+            this.mainPanel.Controls.Add(this.passwordTextBox);
+            this.mainPanel.Controls.Add(this.masterPassword_label);
+            this.mainPanel.Controls.Add(this.usernameTextBox);
+            this.mainPanel.Controls.Add(this.userName_label);
+            this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainPanel.Location = new System.Drawing.Point(10, 10);
+            this.mainPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.mainPanel.Name = "mainPanel";
+            this.mainPanel.Padding = new System.Windows.Forms.Padding(50, 100, 50, 100);
+            this.mainPanel.Size = new System.Drawing.Size(869, 590);
+            this.mainPanel.TabIndex = 5;
+            // 
+            // lineBreak
+            // 
+            this.lineBreak.AutoSize = true;
+            this.lineBreak.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lineBreak.Location = new System.Drawing.Point(50, 222);
+            this.lineBreak.Name = "lineBreak";
+            this.lineBreak.Size = new System.Drawing.Size(0, 20);
+            this.lineBreak.TabIndex = 5;
             // 
             // LogInPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.passwordTextBox);
-            this.Controls.Add(this.masterPassword_label);
-            this.Controls.Add(this.usernameTextBox);
-            this.Controls.Add(this.userName_label);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(32)))));
+            this.Controls.Add(this.mainPanel);
+            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.Name = "LogInPage";
-            this.Padding = new System.Windows.Forms.Padding(100);
+            this.Padding = new System.Windows.Forms.Padding(10);
             this.Size = new System.Drawing.Size(889, 610);
+            this.mainPanel.ResumeLayout(false);
+            this.mainPanel.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -110,5 +159,7 @@
         private TextBox usernameTextBox;
         private TextBox passwordTextBox;
         private Button button1;
+        private Panel mainPanel;
+        private Label lineBreak;
     }
 }

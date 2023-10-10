@@ -7,49 +7,39 @@ namespace Password_Manager_Desktop_Client;
 
 public partial class LogInPage : UserControl
 {
-    private IWebClient _client;
-    private string _username;
-    private string _password;
-    private IVaultCrypto _vaultCryptoHelper;
+    private readonly IWebClient _client;
+    private readonly IVaultCrypto _vaultCryptoHelper;
+    private Form1 _parent;
 
-    public LogInPage(IWebClient client, IVaultCrypto vaultCryptoHelper)
+    public LogInPage(IWebClient client, IVaultCrypto vaultCryptoHelper, Form1 parent)
     {
         _client = client;
         _vaultCryptoHelper = vaultCryptoHelper;
-        _username = "";
-        _password = "";
         InitializeComponent();
-    }
-
-    private void UsernameText_Changed(object sender, EventArgs e)
-    {
-        usernameTextBox.Text = _username;
-    }
-
-    private void PasswordText_Changed(object sender, EventArgs e)
-    {
-        passwordTextBox.Text = _password;
+        _parent = parent;
     }
 
     private async void LogInButton_Clicked(object sender, EventArgs e)
     {
-        var _userDTO = createUserDTO(_username, _password);
-        var userId = await _client.LoginAsync(_userDTO);
+        string password = passwordTextBox.Text;
+        string username = usernameTextBox.Text;
 
-        if(userId.HasValue)
+        var _userDTO = CreateUserDTO(username, password);
+        var userId = await _client.LoginAsync(_userDTO);
+        if (userId.HasValue)
         {
-            //TODO display wrong credentials error
+            _ = _parent.ShowError("Error logging in!");
         }
         else
         {
             //Load vault page
-            CreateVaultPage createVaultPage = new CreateVaultPage(_client, _vaultCryptoHelper, userId.Value, _username, _password);
+            var createVaultPage = new CreateVaultPage(_client, _vaultCryptoHelper, userId.Value, username, password);
             createVaultPage.Dock = DockStyle.Fill;
         }
 
     }
 
-    private UserDto createUserDTO(string username ,string password)
+    private UserDto CreateUserDTO(string username ,string password)
     {
         return new UserDto() { Username = username, Password = password};
     }
