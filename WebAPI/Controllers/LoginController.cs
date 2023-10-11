@@ -64,7 +64,7 @@ public class LoginController : ControllerBase
 
         var user = DtoConverter<UserDtoNoGuid, User>.From(userDtoNoGuid);
         bool returnedId = await _userRepo.CreateAsync(user);
-        if ( !returnedId)
+        if (!returnedId)
         {
             return BadRequest();
         }
