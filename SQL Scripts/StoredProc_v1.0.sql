@@ -65,30 +65,50 @@ GO
 
 
 /****** Creates a prepared statement that adds news passwords to the password manager ******/
-
 CREATE OR ALTER PROCEDURE CREATE_VAULT 
 	-- Add the parameters for the stored procedure here
+	@Vaultid int = null,
 	@Userguid uniqueidentifier = null,
 	@Sitename varbinary(max) = null,
 	@Username varbinary(max) = null,
 	@Password varbinary(max) = null
-
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
 
-    -- Insert statements for procedure here
+	-- Insert statements for procedure here
 	IF @Userguid IS NOT NULL
-		IF EXISTS (SELECT 1 FROM EncryptedVault WHERE Userguid = @Userguid AND Sitename = @Sitename)
-			UPDATE EncryptedVault SET Sitename = @Sitename, Username = @Username, Password = @Password
-		ELSE 
+	BEGIN
+		-- Check if @vaultId exists or is NULL
+		IF @vaultId IS NOT NULL
+		BEGIN
+			IF EXISTS (SELECT 1 FROM EncryptedVault WHERE Vaultid = @Vaultid)
+			BEGIN
+				-- Update the existing vault record
+				UPDATE EncryptedVault 
+				SET Sitename = @Sitename, Username = @Username, Password = @Password
+				WHERE Vaultid = @Vaultid
+			END
+			ELSE
+			BEGIN
+				-- VaultId does not exist, throw an error or handle it as needed
+				THROW 50001, 'ERROR: VaultId does not exist', 1
+			END
+		END
+		ELSE
+		BEGIN
+			-- Create a new vault record since @vaultId is not provided or is NULL
 			INSERT INTO EncryptedVault (Userguid, Sitename, Username, Password)
-				VALUES (@Userguid, @Sitename, @Username, @Password)
-		ELSE 
-			THROW 50001, 'ERROR UPDATING VAULT: SLIPSPACE RUPTURE DETECTED',1
-		
+			VALUES (@Userguid, @Sitename, @Username, @Password)
+		END
+	END
+	ELSE
+	BEGIN
+		-- Handle the case where @Userguid is NULL as needed
+		THROW 50001, 'ERROR: Userguid is required', 1
+	END
 END
 GO
 
