@@ -30,6 +30,15 @@ internal class WebClient : IWebClient
         return response.Data!;
     }
 
+    public async Task<Guid?> CreateUserAsync(UserDto user)
+    {
+        var response = await _client.RequestAsync<Guid?>(Method.Post, $"Login/Create", body: user);
+
+        if (!response.IsSuccessful) throw new Exception($"Error logging in");
+
+        return response.Data!;
+    }
+
     public async Task<bool> UpdateAsync(Guid ownerGuid, PasswordVaultDto vault)
     {
         var response = await _client.RequestAsync<bool>(Method.Put, $"PasswordVault/{ownerGuid}", body: vault);
