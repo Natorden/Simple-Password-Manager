@@ -1,4 +1,6 @@
 ﻿using RestSharp;
+using RestSharp.Authenticators;
+using System.Net;
 using System.Text.Json;
 using Web_Client.DTOs;
 
@@ -6,6 +8,7 @@ namespace Web_Client;
 internal class WebClient : IWebClient
 {
     private readonly IRestClient _client;
+    private string _jwt;
 
     public WebClient(IRestClient client)
     {
@@ -14,7 +17,7 @@ internal class WebClient : IWebClient
 
     public async Task<PasswordVaultDto> GetAsync(Guid ownerGuid)
     {
-        var response = await _client.RequestAsync<PasswordVaultDto>(Method.Get, $"PasswordVault/{ownerGuid}");
+        var response = await _client.RequestAsync<PasswordVaultDto>(Method.Get, $"PasswordVault/{ownerGuid}", jwt: _jwt);
 
         if (!response.IsSuccessful) throw new Exception($"Error retreiving password vault");
 
@@ -28,6 +31,10 @@ internal class WebClient : IWebClient
 
         if (!response.IsSuccessful) throw new Exception($"Error logging in");
 
+        if (response.Cookies.Count == 1)
+        {
+            _jwt = response.Cookies[0].Value;
+        }
         return response.Data!;
     }
 
@@ -40,11 +47,15 @@ internal class WebClient : IWebClient
         return response.Data!;
     }
 
-    public async Task<bool> UpdateAsync(Guid ownerGuid, PasswordVaultDto vault)
+    public async Task<bool> UpdateAsync(Guid? ownerGuid, PasswordVaultDto vault)
     {
-        var response = await _client.RequestAsync<bool>(Method.Put, $"PasswordVault/{ownerGuid}", body: vault);
+        if(_jwt == null)
+        {
+            throw new Exception("You need to be authentificated to call this endpoint!");
+        }
+        var response = await _client.RequestAsync<bool>(Method.Put, $"PasswordVault/{ownerGuid}", body: vault, jwt: _jwt);
 
-        if (!response.IsSuccessful) throw new Exception($"Error updating password vault");
+        if (!response.IsSuccessful) throw new Exception($"Error updating password vault: {response}");
 
         return response.Data!;
     }
@@ -62,21 +73,29 @@ internal class WebClient : IWebClient
 
 public static class RestExtentions
 {
-    public static async Task<RestResponse<T>> RequestAsync<T>(this IRestClient client, Method method, string? resource = null, object? body = null)
+    public static async Task<RestResponse<T>> RequestAsync<T>(this IRestClient client, Method method, string? resource = null, object? body = null, string jwt = null)
     {
         var request = new RestRequest(resource, method);
         if (body != null)
         {
+            if(jwt != null)
+            {
+                request.AddHeader("Authorization", $"Bearer {jwt}");
+            }
             request.AddJsonBody(JsonSerializer.Serialize(body));
         }
         return await client.ExecuteAsync<T>(request, method);
     }
 
-    public static async Task<RestResponse> RequestAsync(this IRestClient client, Method method, string? resource = null, object? body = null)
+    public static async Task<RestResponse> RequestAsync(this IRestClient client, Method method, string? resource = null, object? body = null, string jwt = null)
     {
         var request = new RestRequest(resource, method);
         if (body != null)
         {
+            if (jwt != null)
+            {
+                request.AddHeader("Authorization", $"Bearer {jwt}");
+            }
             request.AddJsonBody(JsonSerializer.Serialize(body));
         }
         return await client.ExecuteAsync(request, method);

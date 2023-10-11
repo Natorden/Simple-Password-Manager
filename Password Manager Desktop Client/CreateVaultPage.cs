@@ -9,14 +9,14 @@ public partial class CreateVaultPage : UserControl
     private string _username;
     private string _password;
     private IWebClient _client;
-    private Guid _userId;
+    private Guid? _userId;
     private PasswordVaultDto? _vault;
     private IVaultCrypto _vaultCryptoService;
     private Form1 _parent;
     private List<DecryptedCredentialsDto>? _decryptedCredentialsDtos = new();
     private List<HashedCredentialsDto>? _encryptedCredentialsDtos = new();
 
-    public CreateVaultPage(IWebClient client, IVaultCrypto vaultCryptoService, Guid userId, string username, string password, Form1 parent)
+    public CreateVaultPage(IWebClient client, IVaultCrypto vaultCryptoService, Guid? userId, string username, string password, Form1 parent)
     {
         _client = client;
         _userId = userId;
@@ -38,7 +38,7 @@ public partial class CreateVaultPage : UserControl
     private async void CreateVaultPage_Load(object sender, EventArgs e)
     {
         //var encryptedVault = await _client.GetAsync(_userId);
-        //var decryptedVault = DecryptVault(encryptedVault);
+        //var decryptedVault = new DecryptedVault(encryptedVault);
         //_decriptedVault = decryptedVault;
     }
 
@@ -93,17 +93,17 @@ public partial class CreateVaultPage : UserControl
 
     private void LogOut_Button_Click(object sender, EventArgs e)
     {
-        //TODO log out user
         _parent.SetPage(new LogInPage(_client, _vaultCryptoService, _parent));
+        //TODO encrypt and sync the vault
         Dispose();
     }
 
-    private void Encrypt_Click(object sender, EventArgs e)
+    private async void Encrypt_Click(object sender, EventArgs e)
     {
         PasswordVaultDto vault = new PasswordVaultDto()
         {
             //TODO change after api and db works
-            OwnerGuid = Guid.NewGuid(),
+            OwnerGuid = _userId,
             EncryptedVault = _encryptedCredentialsDtos,
             DecryptedVault = _decryptedCredentialsDtos
         };
@@ -111,6 +111,15 @@ public partial class CreateVaultPage : UserControl
         var encrypted = _vaultCryptoService.EncryptVault(vault, _username, _password);
         _vault = encrypted;
         _vault.DecryptedVault = new List<DecryptedCredentialsDto>();
+        var updateVault = await _client.UpdateAsync(_userId, _vault);
+        if (updateVault)
+        {
+            _ = _parent.ShowSuccess("Succesfully encrypted and synced vault!");
+        }
+        else
+        {
+            _ = _parent.ShowError("Error while saving encrypted vault!");
+        }
         HideItems();
     }
 

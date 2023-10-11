@@ -28,7 +28,7 @@ public class PasswordVaultController : ControllerBase
     [Authorize]
     public async Task<ActionResult<PasswordVaultDto>> Get(Guid ownerGuid)
     {
-        var validationErrors = GetValidationErrors(ownerGuid, User.Claims, Request.Cookies);
+        var validationErrors = GetValidationErrors(ownerGuid, User.Claims, Request.Headers);
         if (validationErrors != null)
         {
             return validationErrors;
@@ -39,7 +39,7 @@ public class PasswordVaultController : ControllerBase
     }
 
     // PUT api/PasswordVault/<guid>
-    [HttpPut("{id}")]
+    [HttpPut("{ownerGuid}")]
     [Authorize]
     public async Task<IActionResult> Put(Guid ownerGuid, [FromBody] PasswordVaultDto vaultDto)
     {
@@ -48,7 +48,7 @@ public class PasswordVaultController : ControllerBase
             return BadRequest();
         }
 
-        var validationErrors = GetValidationErrors(ownerGuid, User.Claims, Request.Cookies);
+        var validationErrors = GetValidationErrors(ownerGuid, User.Claims, Request.Headers);
         if(validationErrors != null)
         {
             return validationErrors;
@@ -64,13 +64,15 @@ public class PasswordVaultController : ControllerBase
             return BadRequest();
         }
 
-        return NoContent();
+        return Ok(result);
     }
 
-    private ActionResult? GetValidationErrors(Guid ownerGuid, IEnumerable<Claim> claims, IRequestCookieCollection cookies)
+    private ActionResult? GetValidationErrors(Guid ownerGuid, IEnumerable<Claim> claims, IHeaderDictionary headers)
     {
         // Validate the JWT
-        var getCookiesResult = cookies.TryGetValue("X-Access-Token", out var token);
+        var getCookiesResult = headers.TryGetValue("Authorization", out var headerValues);
+        var tokenBearer = headerValues.FirstOrDefault();
+        var token = tokenBearer.Substring(7);
         if (getCookiesResult == false || _jwtHelper.ValidateToken(token) == false)
         {
             return Unauthorized();
