@@ -23,6 +23,7 @@ internal class WebClient : IWebClient
 
     public async Task<Guid?> LoginAsync(UserDto user)
     {
+        user.Guid = Guid.Empty;
         var response = await _client.RequestAsync<Guid?>(Method.Post, $"Login/Login", body: user);
 
         if (!response.IsSuccessful) throw new Exception($"Error logging in");

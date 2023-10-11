@@ -29,7 +29,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[User](
 	[Guid] [uniqueidentifier] NOT NULL,
-	[Username] [nvarchar](255) NOT NULL,
+	[Username] [nvarchar](255) NOT NULL UNIQUE,
 	[Password] [varbinary](max) NOT NULL,
  CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED 
 (
