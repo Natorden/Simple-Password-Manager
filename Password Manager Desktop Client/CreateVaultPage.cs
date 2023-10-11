@@ -47,8 +47,8 @@ public partial class CreateVaultPage : UserControl
 
     private void AddNewPassword_Click(object sender, EventArgs e)
     {
-        var addCredentialsPage = new AddCredentials(parentUserControl: this);
-        _parent.Controls.Add(addCredentialsPage);
+        var addCredentialsPage = new AddCredentials(parentUserControl: this, _parent);
+        _parent.SetPage(addCredentialsPage);
         addCredentialsPage.BringToFront();
     }
 
@@ -98,7 +98,7 @@ public partial class CreateVaultPage : UserControl
     private void LogOut_Button_Click(object sender, EventArgs e)
     {
         //TODO log out user
-        _parent.Controls.Remove(this);
+        _parent.SetPage(new LogInPage(_client, _vaultCryptoService, _parent));
         this.Hide();
     }
 
@@ -120,8 +120,16 @@ public partial class CreateVaultPage : UserControl
 
     private void Decrypt_Click(object sender, EventArgs e)
     {
-        var decrypted = _vaultCryptoService.DecryptVault(_vault, _username, _password);
-        _vault = decrypted;
+        try 
+        {
+            var decrypted = _vaultCryptoService.DecryptVault(_vault, _username, _password);
+            _vault = decrypted;
+        } catch
+        { 
+            _ = _parent.ShowError("Issue durring decryption!");
+        }
+        
+        
         ClearListView();
         InitListView();
     }

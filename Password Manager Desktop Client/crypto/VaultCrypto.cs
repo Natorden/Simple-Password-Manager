@@ -116,8 +116,14 @@ public class VaultCrypto : IVaultCrypto
         var tag = encryptedProp.Skip(28).Take(16).ToArray();
         var textToDecrypt = encryptedProp.Skip(44).ToArray();
         var decryptedProp = new byte[textToDecrypt.Length];
-
-        aes.Decrypt(nonce: nonce, ciphertext: textToDecrypt, tag: tag, plaintext: decryptedProp);
+        try
+        {
+            aes.Decrypt(nonce: nonce, ciphertext: textToDecrypt, tag: tag, plaintext: decryptedProp);
+        }catch (CryptographicException ex) 
+        {
+            throw new Exception("Tag missmatch!", ex);
+        }
+       
 
         return decryptedProp;
     }

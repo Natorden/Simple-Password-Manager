@@ -24,30 +24,42 @@ public partial class LogInPage : UserControl
         string password = passwordTextBox.Text;
         string username = usernameTextBox.Text;
 
-        try
-        {
-            var _userDTO = CreateUserDTO(username, password);
-            var userId = await _client.LoginAsync(_userDTO);
-            if (userId.HasValue)
-            {
-                _ = _parent.ShowError("Error logging in!");
-            }
-            else
-            {
-                //Load vault page
-                var createVaultPage = new CreateVaultPage(_client, _vaultCryptoHelper, userId.Value, username, password, _parent);
-                createVaultPage.Dock = DockStyle.Fill;
-            }
-        }
-        catch
-        {
-            _ = _parent.ShowError("Something went wrong! Check your connection\n and try again.");
-        }
+        //Load vault page
+        var createVaultPage = new CreateVaultPage(_client, _vaultCryptoHelper, new Guid(), username, password, _parent);
+        _parent.SetPage(createVaultPage);
+        createVaultPage.BringToFront();
+
+        //try
+        //{
+        //    var _userDTO = CreateUserDTO(username, password);
+        //    var userId = await _client.LoginAsync(_userDTO);
+        //    if (userId.HasValue)
+        //    {
+        //        _ = _parent.ShowError("Error logging in!");
+        //    }
+        //    else
+        //    {
+        //        //Load vault page
+        //        var createVaultPage = new CreateVaultPage(_client, _vaultCryptoHelper, userId.Value, username, password, _parent);
+        //        createVaultPage.Dock = DockStyle.Fill;
+        //    }
+        //}
+        //catch
+        //{
+        //    _ = _parent.ShowError("Something went wrong! Check your connection\n and try again.");
+        //}
 
     }
+
+
 
     private UserDto CreateUserDTO(string username ,string password)
     {
         return new UserDto() { Username = username, Password = password};
+    }
+
+    private void createAcc_Click(object sender, EventArgs e)
+    {
+
     }
 }

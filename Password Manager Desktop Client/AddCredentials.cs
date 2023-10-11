@@ -11,10 +11,12 @@ namespace Password_Manager_Desktop_Client
         private string? _cr_password;
 
         private CreateVaultPage _parentUserControl;
+        private Form1 _parent;
 
-        public AddCredentials(CreateVaultPage parentUserControl)
+        public AddCredentials(CreateVaultPage parentUserControl, Form1 parent)
         {
             _parentUserControl = parentUserControl;
+            _parent = parent;
             InitializeComponent();
         }
 
@@ -46,7 +48,7 @@ namespace Password_Manager_Desktop_Client
 
         private void close_Click(object sender, EventArgs e)
         {
-            _parentUserControl.Controls.Remove(this);
+            _parent.SetPage(_parentUserControl);
             this.Hide();
         }
 
