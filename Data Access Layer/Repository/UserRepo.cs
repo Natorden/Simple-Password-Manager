@@ -18,11 +18,10 @@ internal class UserRepo : IUserRepo
     public async Task<Guid?> LoginAsync(User user)
     {
         //Set up DynamicParameters object to pass parameters  
-        var parameters = new DynamicParameters();   
-        
-        parameters.Add("Username", user.Username);  
-        parameters.Add("Password", user.Password);  
-            
+        var parameters = new DynamicParameters();
+        parameters.Add("Username", user.Username);
+        parameters.Add("Password", user.Password);
+
         //Execute stored procedure and map the returned result to a Customer object  
         return await _connection.QuerySingleOrDefaultAsync<Guid?>("USER_MASTER_LOGIN", parameters, commandType: CommandType.StoredProcedure);
     }
@@ -33,6 +32,9 @@ internal class UserRepo : IUserRepo
         
         try
         {
+            var saving = Convert.ToBase64String(user.Password);
+            var slat = Convert.ToBase64String(user.Password.Take(16).ToArray());
+
             var parameters = new DynamicParameters(); 
             parameters.Add("Guid", generatedGuid);
             parameters.Add("Username", user.Username);  

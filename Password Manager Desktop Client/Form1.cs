@@ -8,10 +8,10 @@ namespace Password_Manager_Desktop_Client;
 public partial class Form1 : Form
 {
     private Size _formSize;
-    private int _borderSize;
+    private readonly int _borderSize;
 
-    private IWebClient _client;
-    private IVaultCrypto _vaultCryptoHelper;
+    private readonly IWebClient _client;
+    private readonly IVaultCrypto _vaultCryptoHelper;
     public Form1(IWebClient client, IVaultCrypto vaultCryptoHelper)
     {
         _borderSize = 2;
@@ -42,12 +42,12 @@ public partial class Form1 : Form
     }
 
 
-    public async Task ShowSucess(string text)
+    public async Task ShowSuccess(string text)
     {
         var sucessBar = new CustomControls.NotificationLabelBar
         {
             BackColor = Color.Green,
-            ButtonColor = Color.Maroon,
+            ButtonColor = Color.DarkGreen,
             Dock = DockStyle.Top,
             Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point),
             ForeColor = Color.White,

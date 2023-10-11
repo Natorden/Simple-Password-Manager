@@ -72,8 +72,7 @@ public class LoginController : ControllerBase
         return BadRequest();
     }
 
-    [HttpGet("{username}")]
-    [Route("Salt/{username}")]
+    [HttpGet("Salt/{username}")]
     public async Task<ActionResult<byte[]>> GetSaltAsync(string username)
     {
         if (username.IsNullOrEmpty())

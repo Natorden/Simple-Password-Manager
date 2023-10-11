@@ -51,7 +51,7 @@
             this.AddNewPassword_Button.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.AddNewPassword_Button.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.AddNewPassword_Button.Location = new System.Drawing.Point(0, 20);
-            this.AddNewPassword_Button.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.AddNewPassword_Button.Margin = new System.Windows.Forms.Padding(0);
             this.AddNewPassword_Button.Name = "AddNewPassword_Button";
             this.AddNewPassword_Button.Size = new System.Drawing.Size(94, 32);
             this.AddNewPassword_Button.TabIndex = 1;
@@ -71,7 +71,7 @@
             this.logOut_Button.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.logOut_Button.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.logOut_Button.Location = new System.Drawing.Point(282, 20);
-            this.logOut_Button.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.logOut_Button.Margin = new System.Windows.Forms.Padding(0);
             this.logOut_Button.Name = "logOut_Button";
             this.logOut_Button.Size = new System.Drawing.Size(94, 32);
             this.logOut_Button.TabIndex = 2;
@@ -91,7 +91,7 @@
             this.Encrypt.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Encrypt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.Encrypt.Location = new System.Drawing.Point(94, 20);
-            this.Encrypt.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.Encrypt.Margin = new System.Windows.Forms.Padding(0);
             this.Encrypt.Name = "Encrypt";
             this.Encrypt.Size = new System.Drawing.Size(94, 32);
             this.Encrypt.TabIndex = 3;
@@ -111,7 +111,7 @@
             this.decrypt.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.decrypt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.decrypt.Location = new System.Drawing.Point(188, 20);
-            this.decrypt.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.decrypt.Margin = new System.Windows.Forms.Padding(0);
             this.decrypt.Name = "decrypt";
             this.decrypt.Size = new System.Drawing.Size(94, 32);
             this.decrypt.TabIndex = 4;
@@ -121,19 +121,23 @@
             // 
             // listView1
             // 
+            this.listView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(65)))));
+            this.listView1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.Location = new System.Drawing.Point(20, 20);
+            this.listView1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.listView1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.listView1.Location = new System.Drawing.Point(20, 87);
             this.listView1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(377, 441);
+            this.listView1.Size = new System.Drawing.Size(377, 374);
             this.listView1.TabIndex = 5;
             this.listView1.UseCompatibleStateImageBehavior = false;
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(50)))));
-            this.panel1.Controls.Add(this.buttonsPanel);
             this.panel1.Controls.Add(this.listView1);
+            this.panel1.Controls.Add(this.buttonsPanel);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(10, 10);
             this.panel1.Name = "panel1";

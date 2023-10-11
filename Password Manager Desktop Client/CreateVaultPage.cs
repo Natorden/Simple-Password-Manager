@@ -1,9 +1,6 @@
 ﻿using Password_Manager_Desktop_Client.crypto;
-using System.ComponentModel;
-using System.Net;
 using Web_Client;
 using Web_Client.DTOs;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Password_Manager_Desktop_Client;
 
@@ -16,8 +13,8 @@ public partial class CreateVaultPage : UserControl
     private PasswordVaultDto? _vault;
     private IVaultCrypto _vaultCryptoService;
     private Form1 _parent;
-    private List<DecryptedCredentialsDto>? _decryptedCredentialsDtos = new List<DecryptedCredentialsDto>();
-    private List<HashedCredentialsDto>? _encryptedCredentialsDtos = new List<HashedCredentialsDto>();
+    private List<DecryptedCredentialsDto>? _decryptedCredentialsDtos = new();
+    private List<HashedCredentialsDto>? _encryptedCredentialsDtos = new();
 
     public CreateVaultPage(IWebClient client, IVaultCrypto vaultCryptoService, Guid userId, string username, string password, Form1 parent)
     {
@@ -49,7 +46,6 @@ public partial class CreateVaultPage : UserControl
     {
         var addCredentialsPage = new AddCredentials(parentUserControl: this, _parent);
         _parent.SetPage(addCredentialsPage);
-        addCredentialsPage.BringToFront();
     }
 
     public void AddCredentialsToDto(DecryptedCredentialsDto credentials)
@@ -99,7 +95,7 @@ public partial class CreateVaultPage : UserControl
     {
         //TODO log out user
         _parent.SetPage(new LogInPage(_client, _vaultCryptoService, _parent));
-        this.Hide();
+        Dispose();
     }
 
     private void Encrypt_Click(object sender, EventArgs e)
