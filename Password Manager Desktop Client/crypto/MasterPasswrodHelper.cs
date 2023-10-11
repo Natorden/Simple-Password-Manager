@@ -17,7 +17,9 @@ namespace Password_Manager_Desktop_Client.crypto
             var saltSingleHashedKey = ConcatenateByteArrays(salt, singleHashedKey);
             var doubleHashedKey = HashPassword(salt, saltSingleHashedKey);
 
-            return doubleHashedKey;
+            var saltDoubleHashedKey = ConcatenateByteArrays(salt, doubleHashedKey);
+
+            return saltDoubleHashedKey;
         }
 
         private static byte[] HashPassword(byte[] salt, byte[] password)
