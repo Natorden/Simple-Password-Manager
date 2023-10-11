@@ -47,6 +47,15 @@ internal class WebClient : IWebClient
 
         return response.Data!;
     }
+
+    public async Task<byte[]> GetSaltAsync(string username)
+    {
+        var response = await _client.RequestAsync<byte[]>(Method.Get, $"Login/Salt/{username}");
+
+        if (!response.IsSuccessful) throw new Exception($"Error getting salt for {username}");
+
+        return response.Data!;
+    }
 }
 
 

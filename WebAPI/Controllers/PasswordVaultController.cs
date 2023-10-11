@@ -2,7 +2,6 @@
 using Data_Access_Layer.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using System.Security.Claims;
 using WebAPI.DTOs;
 using WebAPI.DTOs.Converters;

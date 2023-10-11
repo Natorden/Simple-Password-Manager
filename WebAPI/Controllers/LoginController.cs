@@ -1,6 +1,7 @@
 ﻿using Data_Access_Layer.Interfaces;
 using Data_Access_Layer.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using WebAPI.DTOs;
 using WebAPI.DTOs.Converters;
 using WebAPI.Security;
@@ -25,7 +26,7 @@ public class LoginController : ControllerBase
     
     [HttpPost]
     [Route("Login")]
-    public async Task<ActionResult<int>> PostAsync([FromBody] UserDto userDto)
+    public async Task<ActionResult<UserDto?>> PostAsync([FromBody] UserDto userDto)
     {
         if (userDto.Password == null || userDto.Username == null)
         {
@@ -55,7 +56,7 @@ public class LoginController : ControllerBase
     
     [HttpPost]
     [Route("Create")]
-    public async Task<IActionResult> CreateAsync([FromBody] UserDtoNoGuid userDtoNoGuid)
+    public async Task<ActionResult<Guid?>> CreateAsync([FromBody] UserDtoNoGuid userDtoNoGuid)
     {
         if (userDtoNoGuid.Password == null || userDtoNoGuid.Username == null)
         {
@@ -63,13 +64,29 @@ public class LoginController : ControllerBase
         }
 
         var user = DtoConverter<UserDtoNoGuid, User>.From(userDtoNoGuid);
-        bool returnedId = await _userRepo.CreateAsync(user);
-        if (!returnedId)
+        user.Guid = Guid.NewGuid();
+        Guid? returnedGuid = await _userRepo.CreateAsync(user);
+        if (returnedGuid.HasValue && returnedGuid != Guid.Empty)
         {
-            return BadRequest();
+            return Ok(user.Guid);
         }
-        return NoContent();
+        return BadRequest();
     }
 
+    [HttpGet("{username}")]
+    [Route("Salt")]
+    public async Task<ActionResult<byte[]>> GetSaltAsync(string username)
+    {
+        if (username.IsNullOrEmpty())
+        {
+            return BadRequest("Username cannot be null");
+        }
 
+        byte[]? returnedSalt = await _userRepo.GetSaltAsync(username);
+        if (returnedSalt != null && returnedSalt.Length == 16)
+        {
+            return Ok(returnedSalt);
+        }
+        return BadRequest();
+    }
 }

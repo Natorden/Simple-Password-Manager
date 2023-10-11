@@ -1,5 +1,5 @@
 /****** Drops then creates the database required by our program ******/
-/****** DROP DATABASE HashedPasswords  ******/
+--DROP DATABASE HashedPasswords
 CREATE DATABASE HashedPasswords
 
 
@@ -13,9 +13,9 @@ GO
 CREATE TABLE [dbo].[EncryptedVault](
 	[Vaultid] [int] IDENTITY(1,1) NOT NULL,
 	[Userguid] [uniqueidentifier] NOT NULL,
-	[Sitename] [varbinary] NOT NULL,
-	[Username] [varbinary] NOT NULL,
-	[Password] [varbinary] NOT NULL,
+	[Sitename] [varbinary](max) NOT NULL,
+	[Username] [varbinary](max) NOT NULL,
+	[Password] [varbinary](max) NOT NULL,
  CONSTRAINT [PK_EncryptedVault_1] PRIMARY KEY CLUSTERED 
 (
 	[Vaultid] ASC
@@ -30,7 +30,7 @@ GO
 CREATE TABLE [dbo].[User](
 	[Guid] [uniqueidentifier] NOT NULL,
 	[Username] [nvarchar](255) NOT NULL,
-	[Password] [varbinary] NOT NULL,
+	[Password] [varbinary](max) NOT NULL,
  CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED 
 (
 	[Guid] ASC

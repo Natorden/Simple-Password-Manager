@@ -3,7 +3,7 @@
 CREATE OR ALTER PROCEDURE USER_MASTER_LOGIN 
 	-- Add the parameters for the stored procedure here
 	@Username nvarchar(255)= null,
-	@Password varbinary = null
+	@Password varbinary(max) = null
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -21,7 +21,7 @@ CREATE OR ALTER PROCEDURE USER_MASTER_CREATE
 	-- Add the parameters for the stored procedure here
 	@Guid uniqueidentifier = null,
 	@Username nvarchar(255) = null,
-	@Password varbinary = null
+	@Password varbinary(max) = null
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -69,9 +69,9 @@ GO
 CREATE OR ALTER PROCEDURE CREATE_VAULT 
 	-- Add the parameters for the stored procedure here
 	@Userguid uniqueidentifier = null,
-	@Sitename varbinary = null,
-	@Username varbinary = null,
-	@Password varbinary = null
+	@Sitename varbinary(max) = null,
+	@Username varbinary(max) = null,
+	@Password varbinary(max) = null
 
 AS
 BEGIN
@@ -89,5 +89,25 @@ BEGIN
 		ELSE 
 			THROW 50001, 'ERROR UPDATING VAULT: SLIPSPACE RUPTURE DETECTED',1
 		
+END
+GO
+
+/****** Creates a prepared statement that fetches passwords from the password manager ******/
+
+CREATE OR ALTER PROCEDURE GET_SALT
+	-- Add the parameters for the stored procedure here
+	@Username nvarchar(255) = null
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	IF @Username IS NOT NULL
+		SELECT U.Password
+		FROM [User] U WHERE U.Username = @Username
+	ELSE 
+		THROW 50001, 'Error fetching user salt',1
 END
 GO

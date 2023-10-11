@@ -8,44 +8,60 @@ namespace Data_Access_Layer.Repository;
 
 internal class UserRepo : IUserRepo
 {
-    private readonly string _connectionString;
+    private readonly IDbConnection _connection;
 
     public UserRepo(string connectionString)
     {
-        _connectionString = connectionString;
+        _connection = new SqlConnection(connectionString);
     }
 
     public async Task<Guid?> LoginAsync(User user)
     {
-        using var connection = new SqlConnection(_connectionString);
         //Set up DynamicParameters object to pass parameters  
-        DynamicParameters parameters = new DynamicParameters();   
+        var parameters = new DynamicParameters();   
         
         parameters.Add("Username", user.Username);  
         parameters.Add("Password", user.Password);  
             
         //Execute stored procedure and map the returned result to a Customer object  
-        return await connection.QuerySingleOrDefaultAsync<Guid?>("USER_MASTER_LOGIN", parameters, commandType: CommandType.StoredProcedure);
+        return await _connection.QuerySingleOrDefaultAsync<Guid?>("USER_MASTER_LOGIN", parameters, commandType: CommandType.StoredProcedure);
     }
 
-    public async Task<bool> CreateAsync(User user)
+    public async Task<Guid?> CreateAsync(User user)
     {
-        using var connection = new SqlConnection(_connectionString);
-        Guid g = Guid.NewGuid();
+        Guid generatedGuid = Guid.NewGuid();
         
-        try{
-                DynamicParameters parameters = new DynamicParameters(); 
-                parameters.Add("Userguid", g);
+        try
+        {
+                var parameters = new DynamicParameters(); 
+                parameters.Add("Userguid", generatedGuid);
                 parameters.Add("Username", user.Username);  
                 parameters.Add("Password", user.Password); 
                 
-                await connection.QueryAsync("USER_MASTER_CREATE", parameters, commandType: CommandType.StoredProcedure);
+                await _connection.QueryAsync("USER_MASTER_CREATE", parameters, commandType: CommandType.StoredProcedure);
 
-                return true;
+                return generatedGuid;
         }
         catch
         {
-            return false;
+            return null;
         }
+    }
+
+    public async Task<byte[]?> GetSaltAsync(string username)
+    {
+        //Set up DynamicParameters object to pass parameters  
+        var parameters = new DynamicParameters();
+
+        parameters.Add("Username", username);
+
+        //Execute stored procedure and map the returned result to a Customer object  
+        var returnedPasswordKey = await _connection.QuerySingleOrDefaultAsync<byte[]?>("GET_SALT", parameters, commandType: CommandType.StoredProcedure);
+        if(returnedPasswordKey != null)
+        {
+            var salt = returnedPasswordKey.Take(16).ToArray();
+            return salt;
+        }
+        return null;
     }
 }
