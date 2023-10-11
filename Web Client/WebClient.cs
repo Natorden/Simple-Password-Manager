@@ -23,7 +23,7 @@ internal class WebClient : IWebClient
 
     public async Task<Guid?> LoginAsync(UserDto user)
     {
-        var response = await _client.RequestAsync<Guid?>(Method.Post, $"Login", body: user);
+        var response = await _client.RequestAsync<Guid?>(Method.Post, $"Login/Login", body: user);
 
         if (!response.IsSuccessful) throw new Exception($"Error logging in");
 
@@ -34,7 +34,7 @@ internal class WebClient : IWebClient
     {
         var response = await _client.RequestAsync<Guid?>(Method.Post, $"Login/Create", body: user);
 
-        if (!response.IsSuccessful) throw new Exception($"Error logging in");
+        if (!response.IsSuccessful) throw new Exception($"Error creating a user in");
 
         return response.Data!;
     }
