@@ -34,7 +34,7 @@ internal class UserRepo : IUserRepo
         try
         {
             var parameters = new DynamicParameters(); 
-            parameters.Add("Userguid", generatedGuid);
+            parameters.Add("Guid", generatedGuid);
             parameters.Add("Username", user.Username);  
             parameters.Add("Password", user.Password); 
                 

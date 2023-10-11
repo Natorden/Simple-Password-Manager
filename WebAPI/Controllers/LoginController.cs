@@ -67,13 +67,13 @@ public class LoginController : ControllerBase
         Guid? returnedGuid = await _userRepo.CreateAsync(user);
         if (returnedGuid.HasValue && returnedGuid != Guid.Empty)
         {
-            return Ok(user.Guid);
+            return Ok(returnedGuid);
         }
         return BadRequest();
     }
 
     [HttpGet("{username}")]
-    [Route("Salt")]
+    [Route("Salt/{username}")]
     public async Task<ActionResult<byte[]>> GetSaltAsync(string username)
     {
         if (username.IsNullOrEmpty())
