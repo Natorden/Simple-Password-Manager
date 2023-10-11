@@ -64,7 +64,6 @@ public class LoginController : ControllerBase
         }
 
         var user = DtoConverter<UserDtoNoGuid, User>.From(userDtoNoGuid);
-        user.Guid = Guid.NewGuid();
         Guid? returnedGuid = await _userRepo.CreateAsync(user);
         if (returnedGuid.HasValue && returnedGuid != Guid.Empty)
         {

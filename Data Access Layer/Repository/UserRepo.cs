@@ -33,14 +33,14 @@ internal class UserRepo : IUserRepo
         
         try
         {
-                var parameters = new DynamicParameters(); 
-                parameters.Add("Userguid", generatedGuid);
-                parameters.Add("Username", user.Username);  
-                parameters.Add("Password", user.Password); 
+            var parameters = new DynamicParameters(); 
+            parameters.Add("Userguid", generatedGuid);
+            parameters.Add("Username", user.Username);  
+            parameters.Add("Password", user.Password); 
                 
-                await _connection.QueryAsync("USER_MASTER_CREATE", parameters, commandType: CommandType.StoredProcedure);
+            await _connection.QueryAsync("USER_MASTER_CREATE", parameters, commandType: CommandType.StoredProcedure);
 
-                return generatedGuid;
+            return generatedGuid;
         }
         catch
         {
