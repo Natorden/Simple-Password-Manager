@@ -24,42 +24,60 @@ public partial class LogInPage : UserControl
         string password = passwordTextBox.Text;
         string username = usernameTextBox.Text;
 
-        //Load vault page
-        var createVaultPage = new CreateVaultPage(_client, _vaultCryptoHelper, new Guid(), username, password, _parent);
-        _parent.SetPage(createVaultPage);
-        createVaultPage.BringToFront();
-
-        //try
-        //{
-        //    var _userDTO = CreateUserDTO(username, password);
-        //    var userId = await _client.LoginAsync(_userDTO);
-        //    if (userId.HasValue)
-        //    {
-        //        _ = _parent.ShowError("Error logging in!");
-        //    }
-        //    else
-        //    {
-        //        //Load vault page
-        //        var createVaultPage = new CreateVaultPage(_client, _vaultCryptoHelper, userId.Value, username, password, _parent);
-        //        createVaultPage.Dock = DockStyle.Fill;
-        //    }
-        //}
-        //catch
-        //{
-        //    _ = _parent.ShowError("Something went wrong! Check your connection\n and try again.");
-        //}
+        try
+        {
+            
+            //var _userDTO = CreateUserDTO(username, password);
+            //var userId = await _client.LoginAsync(_userDTO);
+            if (!userId.HasValue)
+            {
+                _ = _parent.ShowError("Error logging in!");
+            }
+            else
+            {
+                var createVaultPage = new CreateVaultPage(_client, _vaultCryptoHelper, new Guid(), username, password, _parent);
+                _parent.SetPage(createVaultPage);
+                createVaultPage.BringToFront();
+            }
+        }
+        catch
+        {
+            _ = _parent.ShowError("Something went wrong! Check your connection\n and try again.");
+        }
 
     }
 
 
 
-    private UserDto CreateUserDTO(string username ,string password)
+    private UserDto CreateUserDTO(string username ,byte[] password)
     {
         return new UserDto() { Username = username, Password = password};
     }
 
-    private void createAcc_Click(object sender, EventArgs e)
+    private async void createAcc_Click(object sender, EventArgs e)
     {
-
+        string password = passwordTextBox.Text;
+        string username = usernameTextBox.Text;
+        try
+        {
+            var salt = _vaultCryptoHelper.GenerateSalt();
+            var passwordKey = MasterPasswrodHelper.DerivePasswordKey(salt, password);
+            var newUser = CreateUserDTO(username, passwordKey);
+            var userId = await _client.CreateUserAsync(newUser);
+            if (!userId.HasValue)
+            {
+                _ = _parent.ShowError("Error logging in!");
+            }
+            else
+            {
+                var createVaultPage = new CreateVaultPage(_client, _vaultCryptoHelper, new Guid(), username, password, _parent);
+                _parent.SetPage(createVaultPage);
+                createVaultPage.BringToFront();
+            }
+            }
+        catch
+        {
+            _ = _parent.ShowError("Something went wrong! Check your connection\n and try again.");
+        }
     }
 }
