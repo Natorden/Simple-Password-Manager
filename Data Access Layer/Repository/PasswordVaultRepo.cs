@@ -43,7 +43,7 @@ internal class PasswordVaultRepo : IPasswordVaultRepo
             foreach(var credential in vault.EncryptedVault) 
             {
                 DynamicParameters parameters = new DynamicParameters();
-                parameters.Add("Vaultid", credential.Id);
+                parameters.Add("Vaultid", credential.Vaultid);
                 parameters.Add("Userguid", vault.OwnerGuid);
                 parameters.Add("Sitename", credential.Sitename);
                 parameters.Add("Username", credential.Username);  

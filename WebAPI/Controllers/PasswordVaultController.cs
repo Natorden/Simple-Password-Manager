@@ -24,7 +24,7 @@ public class PasswordVaultController : ControllerBase
     }
 
     // GET api/PasswordVault/<guid>
-    [HttpGet("{id}")]
+    [HttpGet("{ownerGuid}")]
     [Authorize]
     public async Task<ActionResult<PasswordVaultDto>> Get(Guid ownerGuid)
     {

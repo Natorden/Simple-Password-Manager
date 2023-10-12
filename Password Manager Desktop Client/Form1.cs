@@ -20,7 +20,7 @@ public partial class Form1 : Form
         InitializeComponent();
     }
 
-    public async Task ShowError(string text)
+    public async Task ShowError(string text, int delayInMilliseconds = 2000)
     {
         var errorBar = new CustomControls.NotificationLabelBar
         {
@@ -38,7 +38,7 @@ public partial class Form1 : Form
         };
         panel1.Controls.Add(errorBar);
         errorBar.BringToFront();
-        await errorBar.ShowNotificationAsync(2000);
+        await errorBar.ShowNotificationAsync(delayInMilliseconds);
     }
 
 

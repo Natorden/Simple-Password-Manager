@@ -40,18 +40,18 @@ builder.Services.AddAuthentication(auth =>
     };
     options.SaveToken = true;
     // Allows the API to accept requests where the JWT is stored in a cookie named X-Access-Token instead of Authorization Header in the request
-    options.Events = new JwtBearerEvents
-    {
-        OnMessageReceived = context =>
-        {
+    //options.Events = new JwtBearerEvents
+    //{
+    //    OnMessageReceived = context =>
+    //    {
 
-            if (context.Request.Cookies.ContainsKey("X-Access-Token"))
-            {
-                context.Token = context.Request.Cookies["X-Access-Token"];
-            }
-            return Task.CompletedTask;
-        }
-    };
+    //        if (context.Request.Cookies.ContainsKey("X-Access-Token"))
+    //        {
+    //            context.Token = context.Request.Cookies["X-Access-Token"];
+    //        }
+    //        return Task.CompletedTask;
+    //    }
+    //};
 });
 
 // builder.Services.AddSwaggerGen(c =>

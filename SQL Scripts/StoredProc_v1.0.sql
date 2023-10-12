@@ -54,7 +54,7 @@ BEGIN
 
     -- Insert statements for procedure here
 	IF @ownerGuid IS NOT NULL
-		SELECT U.Guid, E.Sitename, E.Username, E.Password
+		SELECT U.Guid, E.Vaultid, .Sitename, E.Username, E.Password
 		FROM EncryptedVault E 
 			JOIN [User] U ON U.Guid = E.Userguid
 		WHERE E.Userguid = @ownerGuid

@@ -11,10 +11,28 @@ public partial class CreateVaultPage : UserControl
     private IWebClient _client;
     private Guid? _userId;
     private PasswordVaultDto? _vault;
+    private List<DecryptedCredentialsDto> _decryptedCredentials = new();
+    private PasswordVaultDto? Vault
+    {
+        get 
+        {
+            if (_vault.DecryptedVault == null)
+            {
+                _vault.DecryptedVault = new List<DecryptedCredentialsDto>();
+            }
+            return _vault;
+        }
+        set
+        {
+            _vault = value;
+            if (_vault.DecryptedVault == null)
+            {
+                _vault.DecryptedVault = new List<DecryptedCredentialsDto>();
+            }
+        }
+    }
     private IVaultCrypto _vaultCryptoService;
     private Form1 _parent;
-    private List<DecryptedCredentialsDto>? _decryptedCredentialsDtos = new();
-    private List<HashedCredentialsDto>? _encryptedCredentialsDtos = new();
 
     public CreateVaultPage(IWebClient client, IVaultCrypto vaultCryptoService, Guid? userId, string username, string password, Form1 parent)
     {
@@ -37,9 +55,21 @@ public partial class CreateVaultPage : UserControl
 
     private async void CreateVaultPage_Load(object sender, EventArgs e)
     {
-        //var encryptedVault = await _client.GetAsync(_userId);
-        //var decryptedVault = new DecryptedVault(encryptedVault);
-        //_decriptedVault = decryptedVault;
+        try
+        {
+            var newVault = await _client.GetAsync(_userId);
+            var decrypted = _vaultCryptoService.DecryptVault(newVault, _username, _password);
+            _decryptedCredentials = decrypted.DecryptedVault.ToList();
+            foreach (var credential in _decryptedCredentials)
+            {
+                UpdateListView(credential);
+            }
+            Vault = decrypted;
+        }catch(Exception ex)
+        {
+            _ = _parent.ShowError($"Unable to retrieve the vault: {ex}", 5000);
+        }
+        
     }
 
     private void AddNewPassword_Click(object sender, EventArgs e)
@@ -50,7 +80,7 @@ public partial class CreateVaultPage : UserControl
 
     public void AddCredentialsToDto(DecryptedCredentialsDto credentials)
     {
-        _decryptedCredentialsDtos.Add(credentials);
+        _decryptedCredentials.Add(credentials);
         UpdateListView(credentials);
     }
 
@@ -80,7 +110,7 @@ public partial class CreateVaultPage : UserControl
 
     private void InitListView()
     {
-        foreach(var credential in _vault.DecryptedVault)
+        foreach(var credential in Vault.DecryptedVault)
         {
             ListViewItem item = new ListViewItem(credential.Sitename);
             item.SubItems.Add(credential.Username);
@@ -91,8 +121,9 @@ public partial class CreateVaultPage : UserControl
         
     }
 
-    private void LogOut_Button_Click(object sender, EventArgs e)
+    private async void LogOut_Button_Click(object sender, EventArgs e)
     {
+        await _client.UpdateAsync(_userId, Vault);
         _parent.SetPage(new LogInPage(_client, _vaultCryptoService, _parent));
         //TODO encrypt and sync the vault
         Dispose();
@@ -104,17 +135,27 @@ public partial class CreateVaultPage : UserControl
         {
             //TODO change after api and db works
             OwnerGuid = _userId,
-            EncryptedVault = _encryptedCredentialsDtos,
-            DecryptedVault = _decryptedCredentialsDtos
-        };
+            EncryptedVault = new List<HashedCredentialsDto>(),
+            DecryptedVault = _decryptedCredentials
+    };
 
         var encrypted = _vaultCryptoService.EncryptVault(vault, _username, _password);
-        _vault = encrypted;
-        _vault.DecryptedVault = new List<DecryptedCredentialsDto>();
-        var updateVault = await _client.UpdateAsync(_userId, _vault);
+        Vault = encrypted;
+        var updateVault = await _client.UpdateAsync(_userId, Vault);
         if (updateVault)
         {
             _ = _parent.ShowSuccess("Succesfully encrypted and synced vault!");
+            try
+            {
+                var newVault = await _client.GetAsync(_userId);
+                Vault = newVault;
+            }
+            catch (Exception ex)
+            {
+                _ = _parent.ShowError($"Error while refreshing the vault: {ex}");
+            }
+            
+            
         }
         else
         {
@@ -127,8 +168,13 @@ public partial class CreateVaultPage : UserControl
     {
         try 
         {
-            var decrypted = _vaultCryptoService.DecryptVault(_vault, _username, _password);
-            _vault = decrypted;
+            if(Vault.DecryptedVault == null)
+            {
+                Vault.DecryptedVault = new List<DecryptedCredentialsDto>();
+            }
+            var decrypted = _vaultCryptoService.DecryptVault(Vault, _username, _password);
+            _decryptedCredentials = decrypted.DecryptedVault.ToList();
+            Vault = decrypted;
         } catch
         { 
             _ = _parent.ShowError("Issue durring decryption!");

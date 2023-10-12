@@ -15,9 +15,9 @@ internal class WebClient : IWebClient
         _client = client;
     }
 
-    public async Task<PasswordVaultDto> GetAsync(Guid ownerGuid)
+    public async Task<PasswordVaultDto?> GetAsync(Guid? ownerGuid)
     {
-        var response = await _client.RequestAsync<PasswordVaultDto>(Method.Get, $"PasswordVault/{ownerGuid}", jwt: _jwt);
+        var response = await _client.RequestAsync<PasswordVaultDto?>(Method.Get, $"PasswordVault/{ownerGuid}", jwt: _jwt);
 
         if (!response.IsSuccessful) throw new Exception($"Error retreiving password vault");
 
@@ -76,12 +76,13 @@ public static class RestExtentions
     public static async Task<RestResponse<T>> RequestAsync<T>(this IRestClient client, Method method, string? resource = null, object? body = null, string jwt = null)
     {
         var request = new RestRequest(resource, method);
+        if (jwt != null)
+        {
+            request.AddHeader("Authorization", $"Bearer {jwt}");
+        }
         if (body != null)
         {
-            if(jwt != null)
-            {
-                request.AddHeader("Authorization", $"Bearer {jwt}");
-            }
+            
             request.AddJsonBody(JsonSerializer.Serialize(body));
         }
         return await client.ExecuteAsync<T>(request, method);
@@ -90,12 +91,12 @@ public static class RestExtentions
     public static async Task<RestResponse> RequestAsync(this IRestClient client, Method method, string? resource = null, object? body = null, string jwt = null)
     {
         var request = new RestRequest(resource, method);
+        if (jwt != null)
+        {
+            request.AddHeader("Authorization", $"Bearer {jwt}");
+        }
         if (body != null)
         {
-            if (jwt != null)
-            {
-                request.AddHeader("Authorization", $"Bearer {jwt}");
-            }
             request.AddJsonBody(JsonSerializer.Serialize(body));
         }
         return await client.ExecuteAsync(request, method);

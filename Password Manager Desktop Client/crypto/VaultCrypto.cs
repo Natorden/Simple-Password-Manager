@@ -19,6 +19,16 @@ public class VaultCrypto : IVaultCrypto
 
                     foreach (var property in typeof(DecryptedCredentialsDto).GetProperties())
                     {
+                    var propertyName = property.Name;
+                    if (property.PropertyType == typeof(int?))
+                        {
+                            if(property.GetValue(credentials) == null)
+                            {
+                                continue;
+                            }
+                            encryptedCredential.Vaultid = (int)property.GetValue(credentials);
+                            continue;
+                        }
                         var salt = GenerateSalt();
                         var secretKey = DeriveSecterKey(username, password, salt);
                         var propertyValue = (string)property.GetValue(credentials);
@@ -26,10 +36,7 @@ public class VaultCrypto : IVaultCrypto
                         if(propertyValue != null)
                         {
                         var encryptedProperty = EncryptProperty(propertyValue, secretKey, salt);
-                        
-                        var propertyName = property.Name;
                         typeof(HashedCredentialsDto).GetProperty(propertyName)?.SetValue(encryptedCredential, encryptedProperty);
-                        
                         }
 
                     }
@@ -56,6 +63,15 @@ public class VaultCrypto : IVaultCrypto
 
                 foreach (var property in typeof(HashedCredentialsDto).GetProperties())
                 {
+                    if (property.PropertyType != typeof(byte[]))
+                    {
+                        if (property.GetValue(credentials) == null)
+                        {
+                            continue;
+                        }
+                        decryptedCredential.Vaultid = (int)property.GetValue(credentials);
+                        continue;
+                    }
                     var encryptedProp = (byte[])property.GetValue(credentials);
 
                     if(encryptedProp != null)
