@@ -4,3 +4,8 @@ This password manager requires that you run our SQL Scripts found within our pro
 When done with the above, you can then run the “WebApi” and the “Password Manager Desktop Client” projects. This should launch our API which will be used by the desktop application to communicate with the database, so you can retrieve your passwords. 
 
 One important note, the desktop client only works on Windows machines. Unfortunately, with the way our application handles some data within the models, using Swagger/Postman will also be an issue. So we will attach a video on how the application works.
+
+Showcase of the password manager descktop client:
+
+https://github.com/Natorden/Simple-Password-Manager/assets/73466420/164c52d3-96ca-4f4e-bc12-ac9bd740e33d
+
