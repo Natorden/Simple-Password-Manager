@@ -5,7 +5,7 @@ When done with the above, you can then run the “WebApi” and the “Password 
 
 One important note, the desktop client only works on Windows machines. Unfortunately, with the way our application handles some data within the models, using Swagger/Postman will also be an issue. So we will attach a video on how the application works.
 
-The web api is using JWT for authorization and HTTP-Only cookies to ensure that JS can't tamper with it. When a user is created or logs in, their encypted vault is sent to the client (desktop app) where it gets decrypted. The user can then add new entries and when ready encypt back the valt which sends in back to the database. The encyption is done using AES-GCM with key size of 256. Hashing is done with Argon2id with salt size of 16.
+The web api is using JWT for authorization and HTTP-Only cookies to ensure that JS can't tamper with it. When a user is created or logs in, their encypted vault is sent to the client (desktop app) where it gets decrypted. The user can then add new entries and when ready encypt back the valt which sends in back to the database. The encyption is done using AES-GCM with key size of 256 bits. Hashing is done with Argon2id with salt size of 128 bits.
 
 Showcase of the password manager descktop client:
 
