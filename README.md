@@ -8,6 +8,7 @@ One important note, the desktop client only works on Windows machines. Unfortuna
 The web api is using JWT for authorization and HTTP-Only cookies to ensure that JS can't tamper with it. When a user is created or logs in, their encypted vault is sent to the client (desktop app) where it gets decrypted. The user can then add new entries and when ready encypt back the valt which sends in back to the database. The encyption is done using AES-GCM with key size of 256. Hashing is done with Argon2id with salt size of 16.
 
 Showcase of the password manager descktop client:
+
 https://github.com/Natorden/Simple-Password-Manager/assets/73466420/164c52d3-96ca-4f4e-bc12-ac9bd740e33d
 
 Diagrams:
