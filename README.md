@@ -5,7 +5,13 @@ When done with the above, you can then run the “WebApi” and the “Password 
 
 One important note, the desktop client only works on Windows machines. Unfortunately, with the way our application handles some data within the models, using Swagger/Postman will also be an issue. So we will attach a video on how the application works.
 
-Showcase of the password manager descktop client:
+The web api is using JWT for authorization and HTTP-Only cookies to ensure that JS can't tamper with it. When a user is created or logs in, their encypted vault is sent to the client (desktop app) where it gets decrypted. The user can then add new entries and when ready encypt back the valt which sends in back to the database. The encyption is done using AES-GCM with key size of 256. Hashing is done with Argon2id with salt size of 16.
 
+Showcase of the password manager descktop client:
 https://github.com/Natorden/Simple-Password-Manager/assets/73466420/164c52d3-96ca-4f4e-bc12-ac9bd740e33d
 
+Diagrams:
+
+![Architecture](https://github.com/Natorden/Simple-Password-Manager/assets/40688355/622255f9-2eaf-4401-ae3f-6b57096fb3c1)
+![Key Deriviation Flow](https://github.com/Natorden/Simple-Password-Manager/assets/40688355/84035dc0-e76d-487e-b871-3523c259adcf)
+![System Sequence Diagram](https://github.com/Natorden/Simple-Password-Manager/assets/40688355/653df35f-e706-461b-bad9-79b0221d7789)
